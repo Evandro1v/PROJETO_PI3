@@ -34,21 +34,21 @@ app.use(express.json()); // Middleware para interpretar o corpo da requisição 
 app.use(express.urlencoded({ extended: false })); // Middleware para interpretar dados do formulário codificados na URL.
 
 
-// const conexao = mysql.createConnection({
-//   host: 'autorack.proxy.rlwy.net',
-//   user: 'root',
-//   password: 'WVNcJaxojBHZwkNhEJbzzglIVMFwrLuW',
-//   database: 'railway',
-//   port: '52215'
-// }); // Cria uma conexão com o banco de dados MySQL.
-
 const conexao = mysql.createConnection({
-  host: '127.0.0.1',
+  host: 'interchange.proxy.rlwy.net',
   user: 'root',
-  password: '123456',
-  database: 'tapaburaco',
-  port: '3306'
-}); // Cria uma conexão com o banco de dados MySQL local.
+  password: 'jbgEzcHsJFHBFYVynmMEiODeaqbrfhjk',
+  database: 'railway',
+  port: '59018'
+}); // Cria uma conexão com o banco de dados MySQL.
+
+// const conexao = mysql.createConnection({
+//   host: '127.0.0.1',
+//   user: 'root',
+//   password: '123456',
+//   database: 'tapaburaco',
+//   port: '3306'
+// }); // Cria uma conexão com o banco de dados MySQL local.
 
 conexao.connect(function (erro) {
   if (erro) throw erro; // Se ocorrer um erro na conexão, lança uma exceção.
@@ -308,48 +308,7 @@ async function uploadImage(file) {
   return `https://storage.googleapis.com/${bucket.name}/${fileName}`;
 }
 
-// app.post('/enviar-formulario', isLoggedIn, upload.fields([
-//   { name: 'foto_da_ocorrencia', maxCount: 1 },
-//   { name: 'foto_mapa_da_localizacao', maxCount: 1 }
-// ]), function (req, res) {
-//   const gravidade = req.body.gravidade_da_ocorrencia; // Obtém a gravidade da ocorrência do formulário.
-//   const end_ocorrencia = req.body.end_ocorrencia; // Obtém o endereço da ocorrência do formulário.
-//   const bairro = req.body.bairro; // Obtém o bairro da ocorrência do formulário.
-//   const cep = req.body.cep;// Obtém o cep da ocorrência do formulário.
-//   const descricao_da_ocorrencia = req.body.descricao_da_ocorrencia; // Obtém a descrição da ocorrência do formulário.
-//   let foto_da_ocorrencia = ''; // Inicializa a variável para armazenar a foto da ocorrência.
-//   let foto_mapa_da_localizacao = ''; // Inicializa a variável para armazenar a foto do mapa da localização.
 
-//   // Verifica se o campo de upload 'foto_da_ocorrencia' foi preenchido
-//   if (req.files['foto_da_ocorrencia'] && req.files['foto_da_ocorrencia'].length > 0) {
-//     foto_da_ocorrencia = req.files['foto_da_ocorrencia'][0].path; // Obtém o caminho da foto da ocorrência.
-//   }
-
-//   // Verifica se o campo de upload 'foto_mapa_da_localizacao' foi preenchido
-//   if (req.files['foto_mapa_da_localizacao'] && req.files['foto_mapa_da_localizacao'].length > 0) {
-//     foto_mapa_da_localizacao = req.files['foto_mapa_da_localizacao'][0].path; // Obtém o caminho da foto do mapa da localização.
-//   }
-
-//   if (!gravidade || !end_ocorrencia || !bairro || !descricao_da_ocorrencia) { // Verifica se todos os campos obrigatórios foram preenchidos.
-//     return res.status(400).send('Por favor, preencha todos os campos.'); // Retorna um status 400 e uma mensagem de erro caso algum campo esteja em branco.
-//   }
-
-//   const status = 1; // Define o status da ocorrência como 1 (ativo).
-//   const id_usuario = req.user.id_usuario; // Obtém o ID do usuário autenticado.
-
-//   const sqlInsertOcorrencia = `INSERT INTO cad_problema (id_usuario, end_ocorrencia, bairro,cep, gravidade_da_ocorrencia, descricao_da_ocorrencia, foto_da_ocorrencia, foto_mapa_da_localizacao, status_da_ocorrencia) VALUES (?, ?, ?, ?, ?,?, ?, ?, ?)`; // Consulta SQL para inserir uma nova ocorrência.
-//   const values = [id_usuario, end_ocorrencia, bairro, cep, gravidade, descricao_da_ocorrencia, foto_da_ocorrencia, foto_mapa_da_localizacao, status]; // Valores a serem inseridos na consulta SQL.
-//   conexao.query(sqlInsertOcorrencia, values, function (error, results) {
-//     if (error) {
-//       console.error('Erro ao inserir ocorrência:', error); // Se ocorrer um erro, loga o erro.
-//       return res.status(500).send('Erro ao enviar ocorrência'); // Retorna um status 500 e uma mensagem de erro.
-//     }
-//     console.log('Ocorrência inserida com sucesso:', results); // Loga uma mensagem informando que a ocorrência foi inserida com sucesso.
-//     res.redirect(req.get('referer'));
-//   });
-// });
-
-// exibir imagens
 
 app.get('/exibir-imagem', async (req, res) => {
   const caminho = req.query.caminho;
@@ -458,31 +417,7 @@ app.post('/enviar-solucao', isLoggedIn, upload.single('foto_da_solucao'), async 
 });
 
 
-// app.post('/remover-ocorrencia', isLoggedIn, function (req, res) {
-//   const idOcorrencia = req.body.id_ocorrencia;
 
-//   // Excluir os registros relacionados na tabela cad_solucao
-//   const deleteSolucaoQuery = 'DELETE FROM cad_solucao WHERE id_ocorrencia = ?';
-//   conexao.query(deleteSolucaoQuery, [idOcorrencia], function (error, results) {
-//     if (error) {
-//       console.error('Erro ao remover as soluções relacionadas:', error);
-//       return res.status(500).send('Erro ao remover as soluções relacionadas');
-//     }
-
-//     console.log('Soluções relacionadas removidas com sucesso:', results);
-
-//     // Remover a ocorrência
-//     const deleteQuery = 'DELETE FROM cad_problema WHERE id_ocorrencia = ?';
-//     conexao.query(deleteQuery, [idOcorrencia], function (error, results) {
-//       if (error) {
-//         console.error('Erro ao remover ocorrência:', error);
-//         return res.status(500).send('Erro ao remover ocorrência');
-//       }
-//       console.log('Ocorrência removida com sucesso:', results);
-//       res.sendStatus(200);
-//     });
-//   });
-// });
 app.post('/esqueceusenha', function (req, res) {
   const { email } = req.body; // Obtém o e-mail fornecido pelo usuário no formulário de recuperação de senha.
 
