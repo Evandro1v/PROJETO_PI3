@@ -1,13 +1,13 @@
-  * {
+ /* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-weight: 900;
     font-family: Arial, Helvetica, sans-serif;
   }
+*/
 
-  html {}
-
+/*
   body {
     color: rgba(0, 0, 0, 0.884);
     width: 100%;
@@ -19,17 +19,19 @@
     background-repeat: no-repeat;
     align-items: center;
   }
+  */
 
-
-  .botoes {
+/*  .botoes {
     width: 100%;
     background-color: #000000db;
     display: flex;
     position: fixed;
     justify-content: space-around;
     flex-wrap: wrap;
-  }
+}
+*/
 
+/*Estilo para botões
   .botoes button {
     gap: 5px;
     margin: 10px 0;
@@ -43,9 +45,11 @@
   .botoes form {
     box-shadow: none;
   }
+*/
 
+/*Parece estilizar janelas cadastrar problemas e visualizar problemas
   main {
-    width: 100%;
+    width: 100%; /"Define que a largura do elemento será 100% da largura do seu elemento pai."/
     height: 100%;
     margin-top: 60px;
     display: flex;
@@ -53,9 +57,9 @@
     justify-content: center;
 
   }
+*/
 
-
-
+/*===============
   .cadsolucao {
     height: 100%;
     display: flex;
@@ -82,21 +86,21 @@
     align-items: center;
   }
 
-  h2,
-  h1 {
+  h2, h1 {
     text-align: center;
     background-color: white;
     border-radius: 10px;
     padding: 10px;
-  }
+}
 
   form {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    box-shadow: 1px 1px 1px black;
+   /* box-shadow: 1px 1px 1px black;
   }
-
+*/
+/*
   .container-formulario form,
   .cadsolucao form {
     display: flex;
@@ -162,24 +166,24 @@
     align-self: center;
     cursor: pointer;
   }
-
+*/
   .tabelaproblema {
     margin-top: 15px;
     display: none;
-    /* overflow-x: scroll; */
+    overflow-x: scroll;
     width: 100%;
     font: status-bar;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  table {
+ /* table {
     overflow-x: scroll;
     width: 90%;
     display: table;
-    font: status-bar;
-    border-collapse: collapse;
+    font: status-bar; EV parece obsoleto agora. CAUSA CONFLITO COM .info */
+    /*border-collapse: collapse; EV parece obsoleto agora. CAUSA CONFLITO COM .info 
     margin-top: 20px;
     color: black;
     border-radius: 10px !important;
@@ -213,9 +217,10 @@
     margin: 0 auto;
   }
 
+*/
 
 
-
+/*
   .acoes {
     display: flex;
     flex-direction: column;
@@ -300,21 +305,22 @@
     border: 1px solid #ccc;
     width: 90%;
     border-radius: 5px;
+    overflow: hidden;
   }
 
   .vertical-list .item {
     display: flex;
     flex-direction: column;
     /* padding: 13px 0px; */
-    /* border-bottom: 1px solid #ccc; */
+    /* border-bottom: 1px solid #ccc; 
   }
-
+*/
   .vertical-list .item:last-child {
     border-bottom: none;
   }
 
   .vertical-list .item p:nth-child(even) {
-    background-color: #485460;
+    background-color: #c3d5e6;
     display: flex;
     padding: 12px;
     border: 1px solid #ddd;
@@ -345,26 +351,32 @@
     top: 0;
     /* margin: auto 0; */
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     background-color: rgba(0, 0, 0, 0.8);
-    z-index: 9999;
+    z-index: 3;
     justify-content: center;
     align-items: center;
+    margin-top: 4em;
   }
 
   .imagem-expandida img {
     width: 80%;
-    height: 70%;
+    height: 80%;
   }
 
   .imagem-expandida .fechar {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    color: white;
-    font-size: 24px;
+    top: 0.2em;
+    right: 1.6em;
     text-decoration: none;
+    color: #333;
+    font-size: 1.1em;
+  }
+
+  .imagem-expandida .fechar:hover {
+    color: var(--red-50);
+
   }
 
   .imagem-expandida:target {
@@ -375,54 +387,64 @@
     display: flex;
   }
 
-  .concluido {
-    background-color: rgba(103, 247, 103, 0.692);
-    border-radius: 5px;
+
+
+  @media (max-width: 500px) {
+
+    /* Ajuste este valor conforme necessário */
+    .tabelaproblema {
+      overflow-x: auto;
+      /* Aplicar rolagem apenas quando a largura da tela for menor */
+      width: min-content;
+      /* Largura mínima da tabela */
+    }
+
+    /* Esconde a coluna de fotos quando a largura da tela for menor que 500px */
+    .table th:nth-child(4),
+    .table td:nth-child(4) {
+      display: none;
+    }
 
   }
 
-  .em-andamento {
-    border-radius: 5px;
-    background-color: rgba(233, 81, 81, 0.87);
-  }
+  @media (max-width:700px) {
 
-
-
-
-
-  .solucoes-container {
+    .container-formulario form,
+    .cadsolucao form {
+      width: 90%;
+    }
+  }.solucoes-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    /* Espaço entre os itens */
+    gap: 20px; /* Espaço entre os itens */
     padding: 10px;
-  }
+}
 
-  .solucao-item {
+.solucao-item {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ddd;
+    /*border: 1px solid #ddd;*/
     padding: 10px;
-    width: 300px;
-    /* Ajuste conforme necessário */
+    /*width: 300px;  Ajuste conforme necessário */
+    width: auto;
     background-color: #f9f9f9;
-  }
+}
 
-  .descricao-solucao {
+.descricao-solucao {
     margin-bottom: 10px;
-  }
+}
 
-  .foto-solucao {
+.foto-solucao {
     display: flex;
     justify-content: center;
-  }
+}
 
-  .img-solucao {
+.img-solucao {
     max-width: 100%;
     height: auto;
-  }
+}
 
-  .imagem-expandida {
+.imagem-expandida {
     display: none;
     position: fixed;
     top: 50%;
@@ -432,87 +454,60 @@
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .imagem-expandida img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .imagem-expandida .fechar {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-  }
-
-  @media only screen and (min-width:600px) {
-    .problema-container {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      padding: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-
-    }
-  }
-
-  .problema-item {
-    gap: 5px;
-    display: flex;
-    border: 1px solid #ddd;
-    padding: 16px;
-    background-color: #cdcdcdd9;
-    border-radius: 5px;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
 }
 
-  .img-problema {
-    width: 65px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 5px;
+.imagem-expandida img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*.problema-container {
+ 
+  flex-direction: column;
+  gap: 20px;  Espaço entre os itens  display: flex;
+  padding: 10px;
+}*/
+
+
+  
+
+  
+  @media (max-width: 768px) {
+  .problema-container .col-md-10, .problema-container .col-md-2 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  }
   }
 
-  .problema-acoes {
-    display: flex;
-    gap: 10px;
-    margin-left: 20px;
-  }
 
-  .problema-acoes button {
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
 
-  .problema-acoes button:hover {
-    background-color: #0056b3;
-  }
 
-  @media only screen and (max-width: 768px) {
-    .problema-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding: 10px;
-    }
 
-  }
-  @media only screen and (min-width:769px) {
-    .problema-container {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      padding: 10px;
-    }
-  }
+
+
+
+/*}
+.problema-info {
+  flex-grow: 1;
+
+
+.problema-foto {
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.img-problema {
+  width: 80px;
+  height: 73px;
+  object-fit: cover;
+  border-radius: 7px;
+  margin-left: -19px;
+  /*border-radius: 0.6em;
+}
+*/
+/*.problema-acoes {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+}*/
+

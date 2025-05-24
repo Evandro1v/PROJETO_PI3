@@ -3,23 +3,34 @@
 
 <head>
     <meta charset="UTF-8" />
+    <title>Operaçao Limpeza - Adm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/style2.css" />
-    <title>OPERAÇÃO TAPA BURACOS</title>
+	<link rel="stylesheet" href="/css/style3.css" />
+	<link rel="stylesheet" href="/css/style-Ran.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
 
     <div class="botoes">
-        <button onclick="showForm('cadastroSolucaoForm')">Cadastrar Solução</button>
-        <button onclick="showTable()">Problemas</button>
-        <form action="/logout" method="post">
-            <button type="submit">Sair</button>
-        </form>
+        <!-- Mostra dados do usuário -->
+        <div class="container-usuarios">
+            <p>Olá, {{user.nome}}</p>
+            <form action="/logout" method="post">
+            <button class="bt_sair sombra" type="submit">
+             <span class="icone fa-icon fa-sign-out"></span> <!-- Define icone para o botão -->
+             Sair
+            </button>
+            </form>
+        </div>
 
+        <button onclick="showForm('cadastroSolucaoForm')">Cadastrar Solução</button>
+        <button onclick="showTable()">Visualizar Problemas</button>
     </div>
+
     <main>
-        <button onclick="home()"id="home" style="display: none;" >home</button>
         <div class="cadsolucao" id="cadastroSolucaoForm" style="display: none;">
             <form action="/enviar-solucao" method="post" enctype="multipart/form-data">
                 {{#if error}}
@@ -42,7 +53,7 @@
 
 
         <div class="tabelaproblema" id="tabelaProblema">
-            <h2>PROBLEMAS </h2>
+            <h2>PROBLEMAS NAS VIAS</h2>
             <div class="problema-container">
                 {{#each problemas}}
                 <div class="problema-item">
@@ -100,24 +111,13 @@
                 <div class="item" data-id="{{this.id_ocorrencia}}">
                     <p><strong>ID-Ocorrência:</strong> {{this.id_ocorrencia}}</p>
                     <p><strong>ID-Usuário:</strong> {{this.id_usuario}}</p>
-                    <p><strong>Gravidade:</strong> {{this.gravidade_da_ocorrencia}}</p>
+                    <p><strong>tipo da ocorrencia:</strong> {{this.tipo_da_ocorrencia}}</p>
                     <p><strong>Endereço:</strong> {{this.end_ocorrencia}}</p>
                     <p><strong>Bairro:</strong> {{this.bairro}}</p>
                     <p><strong>Descrição:</strong> {{this.descricao_da_ocorrencia}}</p>
                     <p><strong>Foto da Ocorrência:</strong> <a href="#imagem{{this.id_ocorrencia}}"><img
                                 src="{{this.foto_da_ocorrencia}}" alt="Foto da Ocorrência"
                                 style="max-width: 50px; max-height: 50px;" /></a></p>
-                    <p><strong>Foto do Mapa:</strong> <a href="#mapa{{this.id_ocorrencia}}"><img
-                                src="{{this.foto_mapa_da_localizacao}}" alt="Foto do Mapa"
-                                style="max-width: 75px; max-height: 75px;" /></a></p>
-                    <div class="imagem-expandida" id="imagem{{this.id_ocorrencia}}">
-                        <img src="{{this.foto_da_ocorrencia}}" alt="Foto da Ocorrência" />
-                        <a href="#" class="fechar">&#x2716;</a>
-                    </div>
-                    <div class="imagem-expandida" id="mapa{{this.id_ocorrencia}}">
-                        <img src="{{this.foto_mapa_da_localizacao}}" alt="Foto do Mapa" />
-                        <a href="#" class="fechar">&#x2716;</a>
-                    </div>
                 </div>
                 {{/each}}
             </div>
@@ -145,7 +145,6 @@
             // Oculta a tabela de soluções quando mudar de formulário
             const popupContainerSolucao = document.getElementById('popupContainerSolucao');
             popupContainerSolucao.style.display = 'none';
-            document.getElementById('home').style.display = 'flex';
         }
 
         function showTable() {
@@ -163,13 +162,6 @@
             // Oculta a tabela de soluções quando clicar em visualizar problemas
             const popupContainerSolucao = document.getElementById('popupContainerSolucao');
             popupContainerSolucao.style.display = 'none';
-            document.getElementById('home').style.display = 'flex';
-        }function home() {
-            // Esconde todos os elementos conforme pedido
-            
-            document.getElementById('cadastroSolucaoForm').style.display = 'none';
-            document.getElementById('tabelaProblema').style.display = 'none';
-            document.getElementById('home').style.display = 'none ';
         }
 
         function showPopuproblemas(id_ocorrencia) {

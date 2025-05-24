@@ -1,71 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Operação Limpeza</title>
-    <link rel="stylesheet" href="/css/style3.css" />
-</head>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Operaçao Limpeza</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- <link rel="stylesheet" href="/css/style2.css" /> -->
+		<!-- <link rel="stylesheet" href="/css/style3.css" /> -->
+		<link rel="stylesheet" href="/css/style-Ran.css" />
+	</head>
 
-<body class="bgSizeCover">
+	<body class="centralizar">
+		<header>
+			<div class="sombra2 destaque borda_arredond-16">
+				<h3 class="disposicao_titulos">
+					Sertãozinho-SP
+					</br>
+						<h5 class="disposicao_titulos">
+							Esta aplicação web tem como finalidade prover à população um meio de comunicação eficaz para realizar comunicados junto ao poder público municipal com o objetivo de facilitar e melhorar o contato entre os munícipes e as várias áreas de atuação do poder público municipal no enfrentamento de problemas encontrados pela população.
+						</h5>
+				</h3>
+			</div>
+			
+		</header>
 
-    <section>
-        <!--Div que ficar dentro desta seção ficará centralizado, Usar para manter div pai cenralizado -->
-      
-        <div class="area_conteudo borda_green-40 borda_arredond-8 tam_min-max sombra">
+		<span class="info">
+			<p>
+				Escolha uma opção
+			</p>
+			<hr>
+		</span>
 
-            <main>
-                <header>
-                    <div class="titulos borda_arredond-8">
-                        <h5 class="disposicao_titulos">
-                            Este site foi desenvolvido para que a população de Sertãozinho-SP tenha um canal para fazer
-                            reclamações
-                            referentes
-                           
-                        </h5>
-                    </div>
-                </header>
-                <!-- <section class="parte2"> -->
-                <div class="centralizar disposicao_conteudo">
-                    <span class="info">
-                        <p>
-                            Informe seu E-mail e Senha para fazer uma reclamação.
-                        </p>
-                    </span>
-                    
-      <form  method="post" onsubmit="return validateLOGIN(this)" action="/login" class="container-inputs">
-       {{#if error}}
-<div class="error-message">{{error}}</div>
-{{/if}}
+		<!-- Aplicações
+		<div>
+			<div class="item-container">
+				<div class="item">
+					Logo aqui
+					<a href="/index_Op-Li">Operação Limpeza0</a>
+				</div>
+				<div class="item">
+					Logo aqui
+					<a href="/index_Op-Li">Operação Limpeza0</a>
+				</div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+			</div>
+		</div> -->
 
-                        <input type="email" name="email" id="email-id" placeholder="E-mail" required  />
-                        <span id="span6"></span>
+		<div class="item-container">
+			<div class="container-100">
+				<div class="item">
+					<img src="../images/logo-OpLi.png"
+					alt="Imagem do logotipo da aplicação Operação Limpeza. Uma folha verde parcialmente transparente sobre um quadrado ao fundo de cor acinzentada clara."
+					class="logo">
+					<a href="/index_Op-Li">Operação Limpeza</a>
+				</div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>	
 
-                        <input type="password" name="password" id="password-id" placeholder="Senha" required />
-                        <span id="span7"></span>
+		</div>
 
-                        <input type="submit" class="button botao_blue-50" value="Entrar" title="Clique para salvar seu progresso"/>
 
-                        <div class="container-spans">
-                            <span class="span2 mensagem">Não é cadastrado?</span>
-                            <span class="span3"><a href="/paginadecadastro">Fazer cadastro</a></span>
-                        </div>
-                        <div class="container-spans">
-                            <span class="span2 mensagem">Esqueceu a senha?</span>
-                            <span class="span3"><a href="/esqueceusenha">Recuperar senha</a></span>
-                        </div>
-
-                </div>
-
-                </form>
-        </div>
-        <!--      </section> -->
-        </main>
-        </div>
-        <footer>
-            <div class="centralizar rodape">
-                PI1 GRUPO-005 Sertãozinho-SP - UNIVESP
-            </div>
-        </footer>
-    </section>
-</body>
+		<footer>
+			<div class="rodape">
+				PI-3 GRUPO-012 Sertãozinho-SP - UNIVESP
+			</div>
+		</footer>
+	</body>
+</html>
