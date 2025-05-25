@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Operação limpeza - Usuário</title>
+       <!-- <link rel="stylesheet" href="/css/estilos-BT.css" />  Estilos Bootstrap -->
         <link rel="stylesheet" href="/css/style-Ran.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -109,10 +110,10 @@
 
                                 <!-- Tela de Cadastro de Ocorrências OPLi - logada INÍCIO -->
                                     <!--Esta div contem o formulário para cadastro de ocorrências-->
-                                    <div class="form_container_indoor sombra2 col-12 mt-3 mt-md-0 p-0 col-lg-6"
+                                    <div class="form_container_indoor sombra2"
                                         id="form_cad_ocorrenc" style="display: none;">
                                         
-                                        <div class="d-block col-12 col-md-11 m-auto expandir-100" >
+                                        <div class="expandir-100" >
 
                                         <!--Formulário de cadastro de ocorrências-->
                                         <form action="/enviar-formulario" method="post" enctype="multipart/form-data">
@@ -130,37 +131,37 @@
 
                                             <div class="borda_demarcacao borda_arredond-16">
 
-                                                <div class="mt-2 indoor">
+                                                <div class="indoor">
 
-                                                    <div class="form-row mt-3">
+                                                    <div class="">
                                                         <div class="flexivel">
-                                                            <label for="endereco">* Endereço:</label>
+                                                            <label class="font-bold" for="endereco">* Endereço:</label>
                                                             <input class="input_indoor form-control" type="text" id="end_ocorrencia"
                                                                 name="end_ocorrencia" maxlength="100" required
                                                                 placeholder="Informe o endereco" />
                                                         </div>
 
                                                         <div class="flexivel">
-                                                            <label for="bairro">* Bairro:</label>
+                                                            <label class="font-bold" for="bairro">* Bairro:</label>
                                                             <input class="input_indoor form-control" type="text" id="bairro"
                                                                 name="bairro" maxlength="50" required
                                                                 placeholder="Informe o bairro" />
                                                         </div>
 
                                                         <div class="flexivel">
-                                                            <label for="cep">* CEP:</label>
+                                                            <label class="font-bold" for="cep">* CEP:</label>
                                                             <input class="input_indoor form-control" type="text" id="cep" name="cep"
                                                                 maxlength="8" required placeholder="Ex.: 99999999" />
                                                         </div>
 
                                                     </div>
 
-                                                    <div class="form-row mt-2">
-                                                        <div class="col-md-4 col-sm-12">
-                                                            <label class="pl-2">* Situação - Escolha a opção que melhor se enquadra:</label>
-                                                            <div class="w-100 d-block d-md-flex my-2">
+                                                    <div class="">
+                                                        <div class="">
+                                                            <label class="font-bold" class="">* Situação - Escolha a opção que melhor se enquadra:</label>
+                                                            <div class="">
 
-                                                                <div class="col-sm-12 col-md-2 my-2 my-md-0">
+                                                                <div class="">
                                                                     <input class="input_indoor form-control" type="radio"
                                                                         name="tipo_da_ocorrencia" value="Descarte irregular de lixo"
                                                                          />
@@ -168,7 +169,7 @@
 
                                                                 </div>
 
-                                                                <div class="col-sm-12 col-md-2 my-2 my-md-0">
+                                                                <div class="">
                                                                     <input class="form-control" type="radio"
                                                                         name="tipo_da_ocorrencia" value="Limpeza de residuos em area verde"
                                                                          />
@@ -176,7 +177,7 @@
 
                                                                 </div>
 
-                                                                <div class="col-sm-12 col-md-2 my-2 my-md-0">
+                                                                <div class="">
                                                                     <input class="form-control" type="radio"
                                                                         name="tipo_da_ocorrencia"  value="Limpeza de terrenos (entulhos)"
                                                                          />
@@ -184,11 +185,9 @@
 
                                                                 </div>
 
-                                                                <div class="col-sm-12 col-md-2 my-2 my-md-0">
+                                                                <div class="">
                                                                     <input class="form-control" type="radio"
-                                                                        name="tipo_da_ocorrencia" 
-                                                                        
-                                                                         value="Roçagem de mato alto"
+                                                                        name="tipo_da_ocorrencia" value="Roçagem de mato alto"
                                                                          />
                                                                     <label tabindex="0" for="Alta">Roçagem de mato alto</label>
 
@@ -196,26 +195,31 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-8 col-sm-12 flexivel textarea-like-input">
-                                                            <label for="descricao">Descrição (Opcional):</label>
+                                                        <div class="flexivel textarea-like-input">
+                                                            <label class="font-bold" for="descricao">Descrição (Opcional):</label>
                                                             <textarea class="form-control container-label textarea-like-input"
                                                                 id="descricao_da_ocorrencia" name="descricao_da_ocorrencia"
-                                                                required="" maxlength="255"
+                                                                maxlength="255"
                                                                 placeholder="Ex.: Terreno com mato alto na rua Das Nações, na altura do número 10."></textarea>
                                                         </div>
 
                                                     </div>
 
-                                                    <div class="form-row">
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <label for="foto-ocorrencia">* Foto da Ocorrência:</label>
+                                                    <div class="">
+                                                        <div class="">
+                                                            <!--    <label class="font-bold" for="foto-ocorrencia">* Foto da Ocorrência:</label>
                                                             <input class="input_indoor form-control" type="file" id="foto_da_ocorrencia"
                                                                 name="foto_da_ocorrencia" accept="image/*" required />
+                                                                -->
+                                                            <div class="input-wrapper">
+                                                                <label class="font-bold" for="foto-ocorrencia">* Foto da Ocorrência:</label>
+                                                                <input class="input-indoor form-control" type="file" id="foto_da_ocorrencia" name="foto_da_ocorrencia" accept="image/*" required />
+                                                            </div>
 
                                                         </div>
 
-                                                        <div class="col-md-6 col-sm-12">
-                                                            <label for="foto-mapa">Geolocalização:</label>
+                                                        <div class="">
+                                                            <label class="font-bold" for="geolocalizacao">Geolocalização:</label>
                                                             <input class="input_indoor form-control" type="" onclick=""
                                                                 id="geolocalizacao"
                                                                 name="geolocalizacao" />
@@ -238,9 +242,7 @@
                                         </form>
                                     </div>
                                 <!-- Tela de Cadastro de Ocorrências OPLi - logada FIM -->
-
-
-                                
+ 
                         </div>
                     </div>
                 </div>
@@ -279,21 +281,23 @@
                     </table>
                 </div> --}}
 
-                <!--Esta seção mostra problemas cadastrados-->
-                <div class="borda_green-40 borda_preenchimento borda_arredond-8 sombra area_conteudo margem_topo-2"
-                    style="display: none;>
-                            <div class=" tabelaproblema" id="tabelaProblema">
-                    <span class="info">
-                        <p class="login-form-title">
-                            Visualização da situação(status).
-                            <hr>
-                        </p <p>
-                        Visualização da situação(status) de problemas cadastrados por você.</br>
-                        </p>
-                    </span>
+                <!--Esta div contem o formulário para visualizar ocorrências-->
+                <!--Esta seção mostra Ocorrênias cadastradas-->
+                <div class="form_container_indoor sombra2 div1" style="display: none;>
+
+                    <div class=" tabelaproblema" id="tabelaProblema">
+                        <span>
+                            <p class="form_title font-bold">
+                                Visualização da situação(status).
+                            </p>
+                            <hr class="hr_preto">
+                            <p class="info">
+                            Visualização da situação(status) de ocorrências cadastradas por você.
+                            </p>
+                        </span>
 
                     <!--Esta div contem a estrutura que mostra daca linha para cada cadastro -->
-                    <div class="borda_red-20 borda_arredond-8">
+                    <div class="borda_demarcacao borda_arredond-8">
                         <div class="problema-container">
                             {{#each problemas}}
                             <div class="problema-item borda_gray-30">
@@ -366,16 +370,19 @@
                             {{/each}}
                         </div>
 
-
-
-
-
                         <div class="centralizar">
                             <!--Botão fechar telas Form/Table para fechar telas em paginalogada-->
-                            <button class="botao botao_red-40" onclick="home()">Fechar</button>
+                            <!--Botoes da Tela de Visualização da situação(status) -->
+                            <div class="acoes_linha">
+                                <div class="button-container">
+                                    <input type="submit" onclick="home()" class="button -salmao borda_arredond-16" value="Fechar" />
+                                </div>                                                    
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!--Esta div contem o formulário para visualizar ocorrência FIM-->
+
         </div>
         <!--Div com class="fundo" quando o botão Visualizar é clicado. Impede intereçao com janelas abaixo-->
         <div id="popupDivFundo" class="fundo" style="display: none;"></div>
@@ -520,7 +527,7 @@
                                 </div>
 
                                 <div class="col-md-6 col-sm-12 form-group-float">
-
+                                    
 
                                     <!--Mostra a foto da ocorrência de forma expandida-->
                                     <div class="imagem-expandida" id="imagem{{this.id_ocorrencia}}">
@@ -531,6 +538,7 @@
                                             Fechar
                                         </a>
                                     </div>
+
 
                                 </div>
                             </div>
@@ -723,6 +731,68 @@
         </main>
         </div>
         </div>
+
+
+
+
+
+        <!-- Este trecho provê popup de mensagens e avisos -->
+			<div id="popup" class="popup" style="display: none;">
+				<div class="popup-content">
+					<h2 id="popupMensagem"></h2>
+					<p id="contadorTexto">Você será redirecionado(a) para página de login em <span id="contador"></span> segundos...</p>
+				</div>
+			</div>
+
+			<script>
+				function mostrarPopup(mensagem, sucesso) {
+					const popup = document.getElementById("popup");
+					const popupContent = document.querySelector(".popup-content");
+					const contadorTexto = document.getElementById("contadorTexto"); // Elemento do texto
+
+					let tempo = sucesso ? 4 : 7; // Define tempo para sucesso e erro, respectivamente
+
+					// Ajusta o estilo e o texto com base na mensagem
+					if (!sucesso) {
+						popupContent.classList.add("erro");
+						contadorTexto.innerHTML = "Este aviso será fechada em <span id='contador'></span> segundos...";
+					} else {
+						popupContent.classList.remove("erro");
+						contadorTexto.innerHTML = "Você será redirecionado(a) em <span id='contador'></span> segundos...";
+					}
+
+					document.getElementById("popupMensagem").innerHTML = mensagem;
+					popup.style.display = "flex";
+
+					const contador = document.getElementById("contador");
+					contador.textContent = tempo;
+
+					const intervalo = setInterval(() => {
+						tempo--;
+						contador.textContent = tempo;
+						if (tempo === 0) {
+							clearInterval(intervalo);
+							popup.style.display = "none";
+							if (sucesso) {
+								window.location.href = "/paginalogada";
+							}
+						}
+					}, 1000);
+				}
+
+				document.addEventListener("DOMContentLoaded", () => {
+					const mensagem = "{{{mensagem}}}";
+					const sucesso = {{sucesso}};
+
+					console.log("Mensagem recebida no frontend:", mensagem, "Sucesso?", sucesso); // TESTE PARA DEPURAÇÃO
+
+					if (mensagem) {
+						mostrarPopup(mensagem, sucesso);
+					}
+				});
+
+			</script>
+        <!-- Este trecho provê popup de mensagens e avisos FIM-->
 
     </body>
 

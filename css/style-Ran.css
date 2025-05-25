@@ -505,6 +505,13 @@ a:focus {
                 margin-right: 0;
             }
 
+            /* Apliqua estas regras quando a largura da tela for 523px ou menor */
+            @media screen and (max-width: 523px) {
+                .acoes_linha {
+                    display: block; /* Permitindo que os elementos filhos ocupem o espaço disponível */
+                }
+            }
+
     /* Alinha os elementos horizontalmente */
     .acoes_linha-app {
         display: flex; /* Alinha os elementos horizontalmente */
@@ -681,18 +688,16 @@ a:focus {
         all: initial; /* 🔹 Remove todas as propriedades herdadas */
         background-color: #ffffff;
         position: absolute; /* 🔹 Coloca a div sobre a div pai */
-        top: 50%;
+        top: -1rem; /* 🔹 Define a posição inicial no topo */
         left: 50%;
-        transform: translate(-50%, -50%); /* 🔹 Centraliza perfeitamente */
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-      /*z-index: 1;  🔹 Garante que fique sobre a div 1 */
-        max-width: 860px; /* Define o valor máximo de largura */
-        width: 95%; /* Define a largura inicial */
+        transform: translateX(-50%); /* 🔹 Mantém centralizado */
+        width: 95%;
+        max-width: 860px;
         padding: 20px;
-        margin-top: 7rem;
-       /* margin: auto;*/
         border: 1px solid #ccc;
         border-radius: var(--borderRadius); /* Aplica bordas arredondadas, utilizando uma variável CSS para personalizar o raio */
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        
         }
 
         /* Cria uma margem na parte inferior de form_container_indoor o afastando da borda inferior da tela */
@@ -704,6 +709,26 @@ a:focus {
             bottom: -2rem; /* 🔹 Move para fora da div */
             width: 100%;
             }
+
+            /* 🔹 Larguras individuais para cada seção */
+                .div1 { width: 155%; max-width: 860px; } /* Seção Visualização da situação(status).*/
+                .div2 { width: 80%; max-width: 600px; }
+                .div3 { width: 70%; max-width: 500px; }
+                .div4 { width: 60%; max-width: 400px; }
+
+                /* 🔹 Responsividade: Ajusta conforme o tamanho da tela */
+                @media (max-width: 768px) {
+                    .div1, .div2, .div3, .div4 {
+                        width: 90%;
+                        max-width: 100%;
+                    }
+                }
+
+
+
+
+
+
 
 /* Estilo para Tela-1 app OPLi - Cadastro de ocorrência */
     #form_cad_ocorrenc{
@@ -1252,6 +1277,55 @@ input:focus, textarea:focus {
     background: #ffcccc; /* Fundo vermelho claro */
     border: 1px solid #d9534f; /* Vermelho escuro */
 }
+
+/* Estilo para campos de input de upload de imagem OpLi */
+    .input-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    /* 🔹 Mantém o campo de upload visível, mas diminui o botão */
+    .input-wrapper {
+        position: relative;
+        display: inline-block;
+        display: flex;
+        width: 100%;
+        white-space: nowrap;
+        align-items: center;
+    }
+
+    /* 🔹 Mantém o campo de upload visível, mas esconde o botão */
+        .input-indoor {
+        width: 100%;
+        border-radius: 0px;
+        color: #BCBCBC; /* Padroniza o cor do texto para ficar como a cor do placeholder nos outros inputs */
+    }
+
+    /* 🔹 Esconde completamente o botão de upload */
+    .input-indoor::-webkit-file-upload-button,
+    .input-indoor::file-selector-button {
+        opacity: 0;
+        width: 0px;
+        height: 0px;
+        overflow: hidden;
+        position: absolute;
+    }
+
+    /* 🔹 Adicionando a imagem como substituto do botão */
+    .input-wrapper::after {
+        content: "";
+        position: absolute;
+        right: 5px;
+        top: 62%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        background-image: url('../images/up-2.svg'); /* 🔹 Caminho da imagem */
+        background-size: contain;
+        background-repeat: no-repeat;
+        pointer-events: none;
+    }
 
 
 
