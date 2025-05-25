@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Operação limpeza - Usuário</title>
+        <link rel="stylesheet" href="/css/style-Ran.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+        <!--
+                        <link rel="stylesheet" href="/css/style2.css" />
+                        <link rel="stylesheet" href="/css/style-form.css" />
+                        <link rel="stylesheet" href="/css/pagBase.css" />
+                        <link rel="stylesheet" href="/css/estilos.css" />
+                    -->
+
+    </head>
+
+    <body>
+        <!-- Menu -->
+        <div id="menu-user" class="acoes_linha">
+            <ul id="">
+                <li>
+                    <div class="container-usuarios">
+                        Olá, {{user.nome}}
+                    </div>
+                </li>
+                <li>
+                    <form action="/logout" method="post">
+                        <button class="botao_sair" type="submit">
+                            <span class="icone fa-icon fa-sign-out"></span> <!-- Define icone para o botão -->
+                            Sair
+                        </button>
+                    </form>
+                </li>
+            </ul>
+
+            <div class="logo_app-linha">
+                <div class="logo_app-container">
+                    <img src="../images/logo-OpLi.png"
+                        alt="Imagem do logotipo da aplicação Operação Limpeza. Uma folha verde parcialmente transparente sobre um quadrado ao fundo de cor acinzentada clara."
+                        class="logo-app">
+                </div>
+                <h2 class="nome_app-indoor">Operação Limpeza</h2>
+            </div>
+        </div>
+        
+        <div class="app_Box sombra2 area_conteudo borda_arredond-16"> <!-- Tela-1 app -->
+            <main>
+                <!-- Tela de boas vindas OPLi - logada INÍCIO -->
+                    <header>
+                        <div class="info_app borda_arredond-16">
+                            <h5 class="">
+                                Esta aplicação é um meio de comunicação para a população relatar casos de terrenos e locais
+                                com lixo, mato alto e outras situações de descarte impróprio na cidade de Sertãozinho-SP.
+                            </h5>
+                            <span>
+                                <p class="form_title">
+                                    Bem-vindo(a). O que você deseja?
+                                </p>
+                                <hr class="hr_preto">
+                                <p class="info">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td width="25">
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Disambig.svg"
+                                                        width="35" height="28">
+                                                </td>
+                                                <td class="info">
+                                                    Escolha uma das opções abaixo.
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </p>
+                            </span>
+                        </div>
+                    </header>
+
+                    <div class="grupo_input">
+
+                        <div class="section">
+                            <div class="container-top">
+                                <div>
+
+                                    <!--Botoes da Tela de boas vindas OPLi - logada-->
+                                    <div class="acoes_coluna">
+                                        <div class="button-container">
+                                            <input type="submit" class="reset-input button -verde w160p" value="Relatar uma Ocorrêcia" onclick="showForm('form_cad_ocorrenc')" />
+                                        </div>
+
+                                        <div class="button-container">
+                                            <input type="submit" class="reset-input button -verde w160p" value="Visualizar Ocorrêcias" onclick="showTable()" />
+                                        </div>
+                                    </div>
+
+                                    <div class="rodape" id="bottomRange">
+                                        Aplicação Operação limpeza V0.1
+                                    </div
+                                </div>
+                <!-- Tela de boas vindas OPLi - logada FIM -->
+
+                            <!--Formulário-->
+                            <main>
+                                <!--Botão(home) fechar telas Form/Table-->
+                                <button onclick="home()" id="home" style="display: none;">home</button>
+
+                                <!-- Tela de Cadastro de Ocorrências OPLi - logada INÍCIO -->
+                                    <!--Esta div contem o formulário para cadastro de ocorrências-->
+                                    <div class="form_container_indoor sombra2 col-12 mt-3 mt-md-0 p-0 col-lg-6"
+                                        id="form_cad_ocorrenc" style="display: none;">
+                                        
+                                        <div class="d-block col-12 col-md-11 m-auto expandir-100" >
+
+                                        <!--Formulário de cadastro de ocorrências-->
+                                        <form action="/enviar-formulario" method="post" enctype="multipart/form-data">
+
+                                            <span>
+                                                <p class="form_title font-bold">
+                                                    Cadastro de Ocorrências
+                                                </p>
+                                                <hr class="hr_preto">
+                                                <p class="info">
+                                                Preencha os campos abaixo para informar o problema.</br>
+                                                Campos com * são obrigatórios.
+                                                </p>
+                                            </span>
+
+                                            <div class="borda_demarcacao borda_arredond-16">
+
+                                                <div class="mt-2 indoor">
+
+                                                    <div class="form-row mt-3">
+                                                        <div class="flexivel">
+                                                            <label class="font-bold" for="endereco">* Endereço:</label>
+                                                            <input class="input_indoor form-control" type="text" id="end_ocorrencia"
+                                                                name="end_ocorrencia" maxlength="100" required
+                                                                placeholder="Informe o endereco" />
+                                                        </div>
+
+                                                        <div class="flexivel">
+                                                            <label class="font-bold" for="bairro">* Bairro:</label>
+                                                            <input class="input_indoor form-control" type="text" id="bairro"
+                                                                name="bairro" maxlength="50" required
+                                                                placeholder="Informe o bairro" />
+                                                        </div>
+
+                                                        <div class="flexivel">
+                                                            <label class="font-bold" for="cep">* CEP:</label>
+                                                            <input class="input_indoor form-control" type="text" id="cep" name="cep"
+                                                                maxlength="8" required placeholder="Ex.: 99999999" />
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-row mt-2">
+                                                        <div class="col-md-4 col-sm-12">
+                                                            <label class="font-bold" class="pl-2">* Situação - Escolha a opção que melhor se enquadra:</label>
+                                                            <div class="w-100 d-block d-md-flex my-2">
+
+                                                                <div class="col-sm-12 col-md-2 my-2 my-md-0">
+                                                                    <input class="input_indoor form-control" type="radio"
+                                                                        name="Descarte_irregular_de_lixo" value="Baixa"
+                                                                         />
+                                                                    <label tabindex="0" for="Baixa">Descarte irregular de lixo</label>
+
+                                                                </div>
+
+                                                                <div class="col-sm-12 col-md-2 my-2 my-md-0">
+                                                                    <input class="form-control" type="radio"
+                                                                        name="Limpeza_de_resíduos_em_área_verde" value="Media"
+                                                                         />
+                                                                    <label tabindex="0" for="Media">Limpeza de resíduos em área verde</label>
+
+                                                                </div>
+
+                                                                <div class="col-sm-12 col-md-2 my-2 my-md-0">
+                                                                    <input class="form-control" type="radio"
+                                                                        name="Limpeza_de_terrenos_(entulhos)" value="Alta"
+                                                                         />
+                                                                    <label tabindex="0" for="Alta">Limpeza de terrenos (entulhos)</label>
+
+                                                                </div>
+
+                                                                <div class="col-sm-12 col-md-2 my-2 my-md-0">
+                                                                    <input class="form-control" type="radio"
+                                                                        name="Roçagem_de_mato_alto" value="Alta"
+                                                                         />
+                                                                    <label tabindex="0" for="Alta">Roçagem de mato alto</label>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-8 col-sm-12 flexivel textarea-like-input">
+                                                            <label class="font-bold" for="descricao">Descrição (Opcional):</label>
+                                                            <textarea class="form-control container-label textarea-like-input"
+                                                                id="descricao_da_ocorrencia" name="descricao_da_ocorrencia"
+                                                                required="" maxlength="255"
+                                                                placeholder="Ex.: Terreno com mato alto na rua Das Nações, na altura do número 10."></textarea>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <!--    <label class="font-bold" for="foto-ocorrencia">* Foto da Ocorrência:</label>
+                                                            <input class="input_indoor form-control" type="file" id="foto_da_ocorrencia"
+                                                                name="foto_da_ocorrencia" accept="image/*" required />
+                                                                -->
+                                                            <div class="input-wrapper">
+                                                                <label class="font-bold" for="foto-ocorrencia">* Foto da Ocorrência:</label>
+                                                                <input class="input-indoor form-control" type="file" id="foto_da_ocorrencia" name="foto_da_ocorrencia" accept="image/*" required />
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <label class="font-bold" for="geolocalizacao">Geolocalização:</label>
+                                                            <input class="input_indoor form-control" type="" onclick=""
+                                                                id="geolocalizacao"
+                                                                name="geolocalizacao" />
+                                                        </div>
+                                                    </div>
+
+                                                    <!--Botoes da Tela de Cadastro de Ocorrências -->
+                                                        <div class="acoes_linha">
+                                                            <div class="button-container">
+                                                                <input type="submit" onclick="home()" class="button -salmao borda_arredond-16" value="Cancelar" />
+                                                            </div>                                                    
+
+                                                            <div class="button-container">
+                                                                <input type="submit" id="btn-cadastrar" class="button -verde" value="Enviar" />
+                                                            </div>
+                                                        </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                <!-- Tela de Cadastro de Ocorrências OPLi - logada FIM -->
+
+
+                                
+                        </div>
+                    </div>
+                </div>
+
+
+
+                {{!-- <div class="tabelaproblema" id="tabelaProblema">
+                    <h2>PROBLEMAS NAS VIAS</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID-Ocorrência</th>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                                <th>Foto</th>
+                                <th>Detalhes/Solução</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each problemas}}
+                            <tr>
+                                <td>{{this.id_ocorrencia}}</td>
+                                <td>{{this.descricao_da_ocorrencia}}</td>
+                                <td>{{this.status_da_ocorrencia}}</td>
+                                <td>
+                                    <img src="{{this.foto_da_ocorrencia}}" alt="Foto da Ocorrência"
+                                        style="width: 65px; height: 40px;" />
+                                </td>
+                                <td class="acoes">
+                                    <button onclick="showPopupsolucao('{{this.id_ocorrencia}}')">Solução</button>
+                                    <button onclick="showPopuproblemas('{{this.id_ocorrencia}}')">Detalhes</button>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div> --}}
+
+                <!--Esta seção mostra problemas cadastrados-->
+                <div class="borda_green-40 borda_preenchimento borda_arredond-8 sombra area_conteudo margem_topo-2"
+                    style="display: none;>
+                            <div class=" tabelaproblema" id="tabelaProblema">
+                    <span class="info">
+                        <p class="login-form-title">
+                            Visualização da situação(status).
+                            <hr>
+                        </p <p>
+                        Visualização da situação(status) de problemas cadastrados por você.</br>
+                        </p>
+                    </span>
+
+                    <!--Esta div contem a estrutura que mostra daca linha para cada cadastro -->
+                    <div class="borda_red-20 borda_arredond-8">
+                        <div class="problema-container">
+                            {{#each problemas}}
+                            <div class="problema-item borda_gray-30">
+                                <div class="problema-info">
+                                    <div class="borda_arredond-7 borda_red">
+                                        <div class="row borda_gray-30" style="background-color: #fff;">
+                                            <!-- Primeira região -->
+
+                                            <div class="col-md-10 col-sm-12 borda_gray-30_div-dir">
+                                                <div class="row">
+                                                    <div class="col-md-2 col-sm-12">
+                                                        <label for="ID-Ocorrência">ID:</label>
+                                                        <div class="problema-info div_detalhes_problemas">
+                                                            {{this.id_ocorrencia}}</div>
+                                                    </div>
+                                                    <div class="col-md-8 col-sm-12">
+                                                        <label for="Descrição">Descrição da Ocorrência:</label>
+                                                        <textarea class="form-control div_detalhes_problemas"
+                                                            id="descricao_da_ocorrencia" name="descricao_da_ocorrencia"
+                                                            maxlength="255"
+                                                            style="height: 87px;">{{this.descricao_da_ocorrencia}}</textarea>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-12 label-foto">
+                                                        <label for="Foto da ocorrência">Foto:</label>
+                                                        <div class="problema-foto">
+                                                            <img src="{{this.foto_da_ocorrencia}}"
+                                                                alt="Foto da Ocorrência"
+                                                                class="img-problema borda_arredond-7" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="problema-acoes d-block mt-3 w-100">
+                                                        <button class="botao botao_blue-50"
+                                                            onclick="showPopuproblemas('{{this.id_ocorrencia}}')">Ver
+                                                            Detalhes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Segunda região -->
+                                            <div class="col-md-2 col-sm-12">
+                                                <div class="row">
+                                                    <label class="label_status"
+                                                        for="Status da Ocorrência">Status:</label>
+                                                    <table width="100%">
+                                                        <tr>
+                                                            <td width="100%">
+                                                                <p class="problema-info status">
+                                                                    {{this.status_da_ocorrencia}}</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="100%">
+                                                                <button class="botao botao_blue-50 botao_status"
+                                                                    onclick="showPopupsolucao('{{this.id_ocorrencia}}')">Visualizar</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+
+                                                <div class="problema-acoes d-block">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+
+
+
+
+
+                        <div class="centralizar">
+                            <!--Botão fechar telas Form/Table para fechar telas em paginalogada-->
+                            <button class="botao botao_red-40" onclick="home()">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <!--Div com class="fundo" quando o botão Visualizar é clicado. Impede intereçao com janelas abaixo-->
+        <div id="popupDivFundo" class="fundo" style="display: none;"></div>
+
+
+
+
+
+        <!-- Mostra solução para um problema quando o botão Visualizar(em status) é clicado -->
+        <div class="borda_green-40 borda_preenchimento borda_arredond-8 sombra area_conteudo margem_topo-3 margem_topo popupContainerSolucao"
+            id="popupContainerSolucao" style="display: none;">
+
+            <span class="info">
+                <p class="login-form-title">
+                    Descrição da solução.
+                    <hr>
+                </p <p>
+                Veja a descrição da solução para o problema acompanhada de uma foto da solução.
+                </br>
+                </p>
+            </span>
+
+
+
+            <div class="borda_red-20 borda_arredond-8">
+                <div class="solucoes-container">
+                    <!-- Loop para cada solução -->
+                    {{#each problemas}}
+                    <!-- supondo que você tenha um array de solucoes -->
+                    <div class="solucao-item borda_gray-30" data-id="{{this.id_ocorrencia}}">
+                        <div class="descricao-solucao">
+                            <p><strong>Descrição da Solução:</strong> {{this.descricao_solucao}}</p>
+                        </div>
+                        <div class="foto-solucao">
+                            <!-- Expanda a imagem da solução -->
+                            <a href="#imagemSolucao{{this.id_ocorrencia}}">
+                                <img src="{{this.foto_da_solucao}}" alt="Foto da Solução" class="img-solucao" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo da imagem expandida para a solução -->
+                    <div class="imagem-expandida" id="imagemSolucao{{this.id_ocorrencia}}">
+                        <img src="{{this.foto_da_solucao}}" alt="Foto da Solução" />
+                        <a href="#" class="fechar">&#x2716;</a>
+                    </div>
+
+                    {{/each}}
+                    <!-- Fim do loop -->
+                </div>
+                <div class="centralizar">
+                    <span class="botao botao_red-40" onclick="closePopupsolucao()">Fechar</span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Mostra os detalhes do problema cadastrado quando o botão Detalhes é clicado -->
+        <div class="borda_green-40 borda_preenchimento borda_arredond-8 sombra area_conteudo margem_topo-3 margem_topo popupContainerSolucao"
+            id="popupContainerproblemas" style="display: none;">
+
+            <span class="info">
+                <p class="login-form-title">
+                    Detalhes do problema cadastrado.
+                    <hr>
+                </p <p>
+                Veja abaixo detalhes do problema cadastrado.
+                </br>
+                </p>
+            </span>
+            </br>
+
+            <div class="borda_red-20 borda_arredond-8 col-12 mt-3 mt-md-0 p-0 col-lg-6">
+                <div class="d-block  col-12 col-md-11 m-auto">
+                    <div class="w-sm-100 mt-2">
+                        <p class="text-uppercase font-weight-bold text-navy mt-3">
+                            Dados do Usuário
+                        </p>
+                        <hr>
+
+                        {{#each problemas}}
+                        <div class="item" data-id="{{this.id_ocorrencia}}">
+
+                            <div class="form-row">
+                                <div class="col-md-2 col-sm-2 form-group-float">
+                                    <label for="ID Usuário">ID:</label>
+                                    <div class="div_detalhes_problemas">{{this.id_usuario}}</div>
+                                </div>
+                                <div class="col-md-10 col-sm-10 form-group-float">
+                                    <label for="Nome">Nome:</label>
+                                    <div class="div_detalhes_problemas">{{../user.nome}}</div>
+                                </div>
+                            </div>
+
+                            <p class="text-uppercase font-weight-bold text-navy mt-3">
+                                Dados da Ocorência
+                            </p>
+                            <hr>
+
+                            <div class="form-row">
+                                <div class="col-md-2 col-sm-2 form-group-float">
+                                    <label for="ID Ocorrência">ID:</label>
+                                    <div class="div_detalhes_problemas">{{this.id_ocorrencia}}</div>
+                                </div>
+
+                                <div class="col-md-10 col-sm-10 form-group-float">
+                                    <label for="Gravide">Gravide:</label>
+                                    <div class="div_detalhes_problemas">{{this.gravidade_da_ocorrencia}}</div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-8 col-sm-8 form-group-float">
+                                    <label for="Endereço">Endereço:</label>
+                                    <div class="div_detalhes_problemas">{{this.end_ocorrencia}}</div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-4 form-group-float">
+                                    <label for="Bairro">Bairro:</label>
+                                    <div class="div_detalhes_problemas">{{this.bairro}}</div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row mt-3">
+                                <div class="col-md-12 col-12  form-group-float">
+                                    <label for="Descrição">Descrição:</label>
+                                    <div class="div_detalhes_problemas">{{this.descricao_da_ocorrencia}}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 col-sm-12 form-group-float">
+                                    <label for="Foto da Ocorrência">Foto da Ocorrência:</label>
+                                    <div class="div_detalhes_problemas">
+                                        <a href="#imagem{{this.id_ocorrencia}}"><img src="{{this.foto_da_ocorrencia}}"
+                                                alt="Foto da Ocorrência" style="max-width: 50px; max-height: 50px;" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-12 form-group-float">
+                                    <label for="Foto Mapa da Ocorrência">Foto Mapa da Ocorrência:</label>
+                                    <div class="div_detalhes_problemas">
+                                        <a href="#mapa{{this.id_ocorrencia}}"><img src="{{this.foto_mapa_da_localizacao}}"
+                                                alt="Foto do Mapa" style="max-width: 75px; max-height: 75px;" />
+                                        </a>
+                                    </div>
+
+                                    <!--Mostra a foto da ocorrência de forma expandida-->
+                                    <div class="imagem-expandida" id="imagem{{this.id_ocorrencia}}">
+                                        <img src="{{this.foto_da_ocorrencia}}" alt="Foto da Ocorrência" />
+                                        <a href="#" class="fechar">
+                                            <span class="icone fa-icon fa-icon-fexar fa fa-close"></span>
+                                            <!-- Define icone para o botão -->
+                                            Fechar
+                                        </a>
+                                    </div>
+
+                                    <!--Mostra o mapa da localização da ocorrência de forma expandida-->
+                                    <div class="imagem-expandida" id="mapa{{this.id_ocorrencia}}">
+                                        <img src="{{this.foto_mapa_da_localizacao}}" alt="Foto do Mapa" />
+                                        <a href="#" class="fechar">
+                                            <span class="icone fa-icon fa-icon-fexar fa fa-close"></span>
+                                            <!-- Define icone para o botão -->
+                                            Fechar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+
+                        <!--Botão Fechar para tela de visualização de detalhes da ocorrênica-->
+                        <div class="form-row">
+                            <div class="col-md-12 col-sm-12 form-group-float">
+                                <div class="centralizar">
+                                    <span class="botao botao_red-40" onclick="closePopuproblemas()">Fechar</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </main>
+
+        <script>
+            function showForm(formId) {
+                //mostra botao home. Mostrar form_container_indoor
+                document.getElementById('home').style.display = 'flex';
+
+                const forms = document.querySelectorAll('.form_container_indoor');
+                forms.forEach(form => {
+                    if (form.id === formId) {
+                        form.style.display = 'flex';
+                    } else {
+                        form.style.display = 'none';
+                    }
+                });
+
+                // Oculta/mostra o formulário de cadastro de ocorrencia.
+                // Esse código altera a visibilidade da div, tornando-a oculta (display: none) ou visível (display: flex ou block)
+                    const tabelaProblema = document.getElementById('tabelaProblema');
+                    if (formId === 'form_cad_ocorrenc') {
+                        tabelaProblema.style.display = 'none';
+                    } else {
+                        tabelaProblema.style.display = 'block'; //Div principal com display block para o elemento ocupar toda a largura disponível
+                    }
+
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const formCadastro = document.getElementById('form_cad_ocorrenc');
+                        if (formId === 'form_cad_ocorrenc') {
+                            formCadastro.style.display = 'none';
+                        } else {
+                            formCadastro.style.display = 'block';
+                        }
+                    });
+
+
+                const formCadsolucao = document.getElementById('cadastroSolucaoForm');
+                if (formId === 'cadastroSolucaoForm') {
+                    formCadsolucao.style.display = 'flex';
+                } else {
+                    formCadsolucao.style.display = 'none';
+                }
+
+                // Oculta a tabela de soluções quando mudar de formulário
+                const popupContainerSolucao = document.getElementById('popupContainerSolucao');
+                popupContainerSolucao.style.display = 'none';
+                //esconde botao home
+                document.getElementById('home').style.display = 'flex ';
+            }
+
+            function showTable() {
+                //mostra botao home. Mostrar form_container_indoor
+                document.getElementById('home').style.display = 'flex ';
+                const forms = document.querySelectorAll('.form_container_indoor');
+                forms.forEach(form => {
+                    form.style.display = 'none';
+                });
+
+                const tabelaProblema = document.getElementById('tabelaProblema');
+                tabelaProblema.style.display = 'block';
+
+                const formCadsolucao = document.getElementById('cadastroSolucaoForm');
+                formCadsolucao.style.display = 'none';
+
+                // Oculta a tabela de soluções quando clicar em visualizar problemas
+                const popupContainerSolucao = document.getElementById('popupContainerSolucao');
+                popupContainerSolucao.style.display = 'none';
+            }
+
+            // Esconde todos os elementos
+                function home() {
+                    document.getElementById('form_cad_ocorrenc').style.display = 'none';
+                    document.getElementById('tabelaProblema').style.display = 'none';
+                    //esconde botao home
+                    document.getElementById('home').style.display = 'none ';
+                }
+
+            //Seria aqui o controle da jaela  Detalhes do problema cadastrado???
+            function showPopuproblemas(id_ocorrencia) {
+                var popup = document.getElementById("popupContainerproblemas");
+                popup.style.display = "block";
+
+                //Controla o surgimento da div com class="fundo" quando o botão Ver Detalhes é clicado
+                var popupDiv = document.getElementById('popupDivFundo');
+                popupDiv.style.display = 'block';
+
+                // Ocultar todas as tabelas inicialmente
+                var allTables = document.querySelectorAll("#popupContainerproblemas .item");
+                allTables.forEach(table => {
+                    table.style.display = "none";
+                });
+
+                // Exibir apenas a tabela(formada por divs) relevante com base no id_ocorrencia
+                var targetTable = document.querySelector(`#popupContainerproblemas .item[data-id="${id_ocorrencia}"]`);
+                if (targetTable) {
+                    targetTable.style.display = "block";
+                }
+            }
+
+            function closePopuproblemas() {
+                var popup = document.getElementById("popupContainerproblemas");
+                popup.style.display = "none";
+
+                //Muda o propriedade display de popupDivFundo(div com a class="fundo") para none, "fechando" a div de fundo
+                var popup = document.getElementById("popupDivFundo");
+                popup.style.display = "none";
+            }
+
+
+            function showPopupsolucao(id_ocorrencia) {
+                // console.log("Chamada da função showPopupsolucao com ID de ocorrência:", id_ocorrencia);
+
+                var popup = document.getElementById("popupContainerSolucao");
+                popup.style.display = "block";
+
+                //Controla o surgimento da div com class="fundo" quando o botão Visualizar é clicado
+                var popupDiv = document.getElementById('popupDivFundo');
+                popupDiv.style.display = 'block';
+
+                // Ocultar todos os itens de solução inicialmente
+                var solucoes = document.querySelectorAll("#popupContainerSolucao .solucao-item");
+                solucoes.forEach(function (solucao) {
+                    solucao.style.display = "none";
+                });
+
+                // Exibir apenas o item de solução correspondente ao ID da ocorrência
+                var solucaoEspecifica = document.querySelector(`#popupContainerSolucao .solucao-item[data-id="${id_ocorrencia}"]`);
+                if (solucaoEspecifica) {
+                    solucaoEspecifica.style.display = "flex"; //
+                } else {
+                    // console.warn(`Nenhuma solução encontrada para a ocorrência com ID ${id_ocorrencia}`);
+                }
+            }
+            function closePopupsolucao() {
+                var popup = document.getElementById("popupContainerSolucao");
+                popup.style.display = "none";
+
+                //Muda o propriedade display de popupDivFundo(div com a class="fundo") para none, "fechando" a div de fundo
+                var popup = document.getElementById("popupDivFundo");
+                popup.style.display = "none";
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                var statusElements = document.querySelectorAll('.problema-info .status');
+                statusElements.forEach(function (statusElement) {
+                    if (statusElement.textContent.includes('1')) {
+                        statusElement.innerHTML = '<p class="em-andamento">Em andamento</p>';
+                    } else {
+                        statusElement.innerHTML = '<p class="concluido">Concluído</p>';
+                    }
+                });
+            });
+        </script>
+
+        <!--Controla a div com class="fundo" quando o botão Visualizar é clicado-->
+
+
+        </div>
+        </div>
+
+
+        <div class="section" id="rodape">
+            <footer>
+                <div class="centralizar rodape">
+                    PI-3 GRUPO-012 Sertãozinho-SP - UNIVESP
+                </div>
+            </footer>
+        </div>
+
+        </div>
+
+        </main>
+        </div>
+        </div>
+
+    </body>
+
+</html>

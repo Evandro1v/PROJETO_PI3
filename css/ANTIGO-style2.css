@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 900;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    color: rgba(0, 255, 242, 0.884);
+    background-image: url("/images/bg-intro-desktop.png");
+    background-color: rgb(64 0 99);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-usuarios {
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    color: red;
+    margin-bottom: 10px;
+}
+
+.container-formulario {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

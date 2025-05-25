@@ -34,21 +34,21 @@ app.use(express.json()); // Middleware para interpretar o corpo da requisição 
 app.use(express.urlencoded({ extended: false })); // Middleware para interpretar dados do formulário codificados na URL.
 
 
-const conexao = mysql.createConnection({
-  host: 'tramway.proxy.rlwy.net',
-  user: 'root',
-  password: 'ksAVssaxrROprjBIoUcYTAckUZRcFERw',
-  database: 'railway',
-  port: '44640'
-}); // Cria uma conexão com o banco de dados MySQL.
-
 // const conexao = mysql.createConnection({
-//   host: '127.0.0.1',
+//   host: 'junction.proxy.rlwy.net',
 //   user: 'root',
-//   password: '123456',
-//   database: 'operacaolimpeza',
-//   port: '3306'
-// }); // Cria uma conexão com o banco de dados MySQL local.
+//   password: 'WaPYAXZitnmQGzutZVWjvtETyMvECrAl',
+//   database: 'railway',
+//   port: '41162'
+// }); // Cria uma conexão com o banco de dados MySQL.
+
+const conexao = mysql.createConnection({
+  host: '127.0.0.1',
+  user: 'root',
+  password: '',
+  database: 'tapaburaco',
+  port: '3306'
+}); // Cria uma conexão com o banco de dados MySQL local.
 
 //conexao.connect(function (erro) {
 //  if (erro) throw erro; // Se ocorrer um erro na conexão, lança uma exceção.
@@ -302,52 +302,39 @@ app.post('/logout', function (req, res) {
 
 
 // Função para lidar com o envio do formulário de ocorrência
-  app.post('/enviar-formulario', isLoggedIn, upload.fields([
-    { name: 'foto_da_ocorrencia', maxCount: 1 }
-  ]), async function (req, res) {
-    const tipoOcorrencia = req.body.tipo_da_ocorrencia;
-    const end_ocorrencia = req.body.end_ocorrencia;
-    const bairro = req.body.bairro;
-    const cep = req.body.cep;
-    const descricao_da_ocorrencia = req.body.descricao_da_ocorrencia;
-    
-    let mensagem, sucesso;
-    
-    try {
-      // Realiza o upload das imagens da ocorrência e do mapa da localização
-      const [fotoDaOcorrenciaURL] = await Promise.all([
-        uploadImage(req.files['foto_da_ocorrencia'][0]),
-      ]);
+app.post('/enviar-formulario', isLoggedIn, upload.fields([
+  { name: 'foto_da_ocorrencia', maxCount: 1 }
+]), async function (req, res) {
+  const tipoOcorrencia = req.body.tipo_da_ocorrencia;
+  const end_ocorrencia = req.body.end_ocorrencia;
+  const bairro = req.body.bairro;
+  const cep = req.body.cep;
+  const descricao_da_ocorrencia = req.body.descricao_da_ocorrencia;
 
-      // Agora você pode salvar os URLs das imagens no banco de dados ou usá-los diretamente
-      // Exemplo de como salvar os URLs no banco de dados:
-      // Salva ocorrência no banco de dados
-      const sqlInsertOcorrencia = `INSERT INTO cad_problema (id_usuario, end_ocorrencia, bairro,cep, tipo_da_ocorrencia, descricao_da_ocorrencia, foto_da_ocorrencia, status_da_ocorrencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-      const values = [req.user.id_usuario, end_ocorrencia, bairro, cep, tipoOcorrencia, descricao_da_ocorrencia, fotoDaOcorrenciaURL, 1];
+  try {
+    // Realiza o upload das imagens da ocorrência e do mapa da localização
+    const [fotoDaOcorrenciaURL] = await Promise.all([
+      uploadImage(req.files['foto_da_ocorrencia'][0]),
+    ]);
 
-      conexao.query(sqlInsertOcorrencia, values, function (error, results) {
-        if (error) {
-          console.error('Erro ao inserir ocorrência:', error);
-          mensagem = "❌ Erro ao enviar ocorrência. <h6>Por favor, contacte-nos para obter assistência.</h6>";
-          sucesso = false;
-          return res.render("paginalogada", { mensagem, sucesso }); // Renderiza página de mensagem
-          //return res.status(500).send('Erro ao enviar ocorrência.');
+    // Agora você pode salvar os URLs das imagens no banco de dados ou usá-los diretamente
+    // Exemplo de como salvar os URLs no banco de dados:
+    const sqlInsertOcorrencia = `INSERT INTO cad_problema (id_usuario, end_ocorrencia, bairro,cep, tipo_da_ocorrencia, descricao_da_ocorrencia, foto_da_ocorrencia, status_da_ocorrencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const values = [req.user.id_usuario, end_ocorrencia, bairro, cep, tipoOcorrencia, descricao_da_ocorrencia, fotoDaOcorrenciaURL, 1];
 
-        }
-        console.log('Ocorrência inserida com sucesso:', results);
-        mensagem = "✅ Ocorrência cadastrada com sucesso!";
-        sucesso = true;
-        res.render("paginalogada", { mensagem, sucesso }); // Exibe mensagem antes de redirecionar
-        //res.redirect(req.get('referer'));
-      });
-    } catch (error) {
-      console.error('Erro ao fazer upload de imagens:', error);
-      mensagem = "❌ Erro ao fazer upload de imagens.";
-      sucesso = false;
-      res.render("paginalogada", { mensagem, sucesso });
-      //res.status(500).send('Erro ao fazer upload de imagens.');
-    }
-  });
+    conexao.query(sqlInsertOcorrencia, values, function (error, results) {
+      if (error) {
+        console.error('Erro ao inserir ocorrência:', error);
+        return res.status(500).send('Erro ao enviar ocorrência.');
+      }
+      console.log('Ocorrência inserida com sucesso:', results);
+      res.redirect(req.get('referer'));
+    });
+  } catch (error) {
+    console.error('Erro ao fazer upload de imagens:', error);
+    res.status(500).send('Erro ao fazer upload de imagens.');
+  }
+});
 
 // Função para fazer upload de uma imagem para o armazenamento na nuvem
 async function uploadImage(file) {

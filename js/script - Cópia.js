@@ -1,48 +1,19 @@
-//Função usada em esqueceusenha
-	/* A função abaixo procura fazer a div que mostra a mensagem só existir
-	quando houver erro, criando e removendo essa div dinamicamente */
-	document.addEventListener("DOMContentLoaded", function() {
-		let errorDiv = document.querySelector('.error-message');
-		let emailInput = document.getElementById("email-id");
+  //Código alterado para exibir todas as mensagens de erro em uma única div com a classe error-message.
 
-		if (errorDiv) {
-			// 🔹 Remove espaços em branco dentro da div
-			/* A remoção de espaços na div faz o css atuar sobre ela e a faz sumir */
-			errorDiv.innerHTML = errorDiv.innerHTML.trim();
+  function addErrorMessage(message) {
+    let errorDiv = document.querySelector('.error-message');
 
-			// 🔹 Se estiver vazia após a limpeza, oculta a div
-		// if (errorDiv.innerHTML === "") {
-		//      errorDiv.style.display = "none";
-		//  }
-		}
+    if (!errorDiv) {
+        errorDiv = document.createElement('div');
+        errorDiv.classList.add('error-message');
+        const form = document.querySelector('form[action="/cadastro"]');
+        if (form) {
+            form.prepend(errorDiv);
+        }
+    }
 
-		// 🔹 Evento para exibir a div se o usuário clicar no campo e ela estiver oculta
-		if (submitButton) {
-			submitButton.addEventListener("click", function(event) {
-				if (errorDiv && errorDiv.style.display === "none") {
-					errorDiv.style.display = "block"; // 🔹 Faz a div aparecer novamente
-				}
-			});
-		}
-	});
-
-	// Unifica as mensagens do back-end e do front-end, para inserir mensagens dentro do mesmo campo em esqueceusenha 
-	// 🔹 Modificar a função de validação para exibir erro corretamente
-	function addErrorMessage(message) {
-		let errorDiv = document.querySelector('.error-message');
-
-		if (!errorDiv) {
-			errorDiv = document.createElement('div');
-			errorDiv.classList.add('error-message');
-			const form = document.querySelector('form[action="/cadastro"]');
-			if (form) {
-				form.prepend(errorDiv);
-			}
-		}
-
-		errorDiv.innerHTML += `<p>${message}</p>`;
-		errorDiv.style.display = "block"; // 🔹 Exibir a div quando houver erro
-	}
+    errorDiv.innerHTML += `<p>${message}</p>`; // 🔹 Adiciona a mensagem ao HTML
+}
 
     
 // Função para validação de campos no formulário de cadastro
@@ -116,7 +87,6 @@ function validateResetPasswordForm(event) {
 		isFieldsValidated = false;
 		return; // Se o campo está vazio, Interrompe a execução antes de validar o formato
 	}
-	
 
 	// Validar formato do email
 	const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -150,7 +120,7 @@ function validateResetPasswordForm(event) {
 			} else {
 				console.warn("Aviso: Formulário de recuperação de senha não encontrado.");
 			}
-			
+		
 			const formLogin = document.querySelector('form[action="/index_Op-Li"]');
 			if (formLogin) {
 				formLogin.addEventListener("submit", validateLOGIN);
@@ -205,45 +175,22 @@ function validateResetPasswordForm(event) {
 			const senha = document.getElementById("password-id").value.trim();
 		
 			let isFieldsValidated = true;
-			let allFieldsEmpty = !nome && !telefone && !email && !senha;
 		
-			// 🔹 Se todos os campos estiverem vazios, mostrar mensagem geral
-			if (allFieldsEmpty) {
-				addErrorMessage("Por favor, preencha os campos antes de continuar.");
+			if (!nome || nome.length < 3) {
+				addErrorMessage("Erro: Nome inválido!");
 				isFieldsValidated = false;
-			} else {
-				// 🔹 Verificações campo a campo
-				if (!nome) {
-					addErrorMessage("Por favor, insira um nome.");
-					isFieldsValidated = false;
-				} else if (nome.length < 3) {
-					addErrorMessage("O nome é muito curto.");
-					isFieldsValidated = false;
-				}
-		
-				if (!telefone) {
-					addErrorMessage("Por favor, insira um telefone.");
-					isFieldsValidated = false;
-				} else if (telefone.length < 10) {
-					addErrorMessage("Telefone inválido, tente novamente.");
-					isFieldsValidated = false;
-				}
-		
-				if (!email) {
-					addErrorMessage("Por favor, insira um e-mail.");
-					isFieldsValidated = false;
-				} else if (!email.includes("@")) {
-					addErrorMessage("E-mail inválido, tente novamente.");
-					isFieldsValidated = false;
-				}
-		
-				if (!senha) {
-					addErrorMessage("Por favor, insira uma senha.");
-					isFieldsValidated = false;
-				} else if (senha.length < 6) {
-					addErrorMessage("Senha curta, use 6 caracteres ou mais.");
-					isFieldsValidated = false;
-				}
+			}
+			if (!telefone || telefone.length < 10) {
+				addErrorMessage("Erro: Telefone inválido!");
+				isFieldsValidated = false;
+			}
+			if (!email || !email.includes("@")) {
+				addErrorMessage("Erro: Email inválido!");
+				isFieldsValidated = false;
+			}
+			if (!senha || senha.length < 6) {
+				addErrorMessage("Erro: Senha curta!");
+				isFieldsValidated = false;
 			}
 		
 			console.log("Status final de isFieldsValidated:", isFieldsValidated);
@@ -256,7 +203,6 @@ function validateResetPasswordForm(event) {
 			console.log("Sucesso: Formulário validado corretamente!");
 			return true;
 		};
-		
 		
 
 

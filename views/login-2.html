@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style-Ran.css" />
+
+    <title>Login</title>
+    <style>
+        .login_Box {
+            width: 420px;
+            padding: 20px;
+            margin: auto;
+            border: 1px solid #ccc;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: -30px; /* Eleva a imagem acima da margem superior */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px; /* Ajuste conforme necessário */
+            height: auto;
+        }
+
+        .descricao {
+            font-weight: bold;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .acoes {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="login_Box sombra2 borda_arredond-16">
+        <div class="div-center">
+            <img src="../images/logo-OpLi.png"
+            alt="Imagem do logotipo da aplicação Operação Limpeza. Uma folha verde parcialmente transparente sobre um quadrado ao fundo de cor acinzentada clara."
+            class="logo-login">
+        </div>
+        <h2 class="nome_app">Operação Limpeza</h2>
+        
+        <header>
+            <div class="info_app">
+                <h5 class="">
+                    Esta aplicação é um meio de comunicação para a população relatar casos de terrenos e locais com lixo, mato alto e outras situações de descarte impróprio na cidade de Sertãozinho-SP.
+                </h5>
+                <span class="info">
+                    <p>
+                    Informe seu E-mail e Senha para entrar.
+                    </p>
+                    <hr class="hr_preto">
+                </span>
+            </div>
+        </header>
+        
+
+        
+        <div class="input-group">
+            <input type="email" placeholder="E-mail-22">
+            <input type="password" placeholder="Senha">
+        </div>
+
+        <div class="acoes">
+            <div>
+                <div class="container-spans">
+                    <span class="span2 mensagem">Não é cadastrado?</span>
+                    <span class="span3"><a href="/paginadecadastro">Fazer cadastro</a></span>
+                </div>
+                <div class="container-spans">
+                    <span class="span2 mensagem">Esqueceu a senha?</span>
+                    <span class="span3"><a href="/esqueceusenha">Recuperar senha</a></span>
+                </div>
+            </div>
+            <button class="button -verde alinhar_direita">Entrar</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="74mm"
+   height="71mm"
+   viewBox="0 0 74 71"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="up.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="34.285714"
+     inkscape:cy="560"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="838"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-226)">
+    <g
+       id="layer1-1"
+       inkscape:label="Camada 1"
+       transform="matrix(18.16899,0,0,19.753363,1.4148141,226.41065)">
+      <g
+         transform="matrix(0.26458333,0,0,0.26458333,5.895995,8.7648119)"
+         id="g99"
+         style="fill:#000000">
+        <g
+           style="stroke-width:0"
+           id="SVGRepo_bgCarrier" />
+        <g
+           style="stroke-linecap:round;stroke-linejoin:round"
+           id="SVGRepo_tracerCarrier" />
+        <g
+           id="SVGRepo_iconCarrier">
+          <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+          <title
+             id="title75">ic_fluent_send_copy_24_filled</title>
+          <desc
+             id="desc77">Created with Sketch.</desc>
+          <g
+             style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
+             id="??-Product-Icons">
+            <g
+               style="fill:#212121;fill-rule:nonzero"
+               id="ic_fluent_send_copy_24_filled">
+              <path
+                 sodipodi:nodetypes="cccsccsccssccsccsccscccsccsccccccccccccccccc"
+                 inkscape:connector-curvature="0"
+                 d="m -8.2155189,-27.531225 c 0.512836,0 0.935507,0.38604 0.993272,0.883379 l 0.0067,0.116621 v 4.501001 c 0,1.325483 -1.031536,2.410039 -2.3356239,2.494682 l -0.164376,0.0053 H -19.715863 c -1.325483,0 -2.410038,-1.031536 -2.494682,-2.335625 l -0.0053,-0.164375 v -4.489255 c 0,-0.552284 0.447715,-1 1,-1 0.512836,0 0.935507,0.386041 0.993272,0.883379 l 0.0067,0.116621 v 4.489255 c 0,0.24546 0.176875,0.449608 0.410125,0.491944 l 0.08988,0.0081 h 10.0003232 c 0.24546,0 0.449608,-0.176875 0.491944,-0.410125 l 0.0081,-0.08988 v -4.501001 c 0,-0.552285 0.4477149,-1 0.9999999,-1 z m -10.7061121,-1.693501 3.497645,-3.5 c 0.360363,-0.360605 0.927585,-0.388525 1.319979,-0.08363 l 0.09423,0.08316 3.502355,3.5 c 0.390656,0.390394 0.390868,1.023558 4.76e-4,1.414214 -0.360363,0.360605 -0.927585,0.388525 -1.319979,0.08363 l -0.09423,-0.08316 -1.793708,-1.792345 5.77e-4,4.839946 c 0,0.512836 -0.38604,0.935507 -0.883379,0.993272 l -0.116621,0.0067 c -0.512836,0 -0.935507,-0.38604 -0.993272,-0.883379 l -0.0067,-0.116621 -5.77e-4,-4.842946 -1.792079,1.794869 c -0.360362,0.360605 -0.927584,0.388525 -1.319978,0.08363 l -0.09423,-0.08316 c -0.360605,-0.360357 -0.388526,-0.927579 -0.08363,-1.319973 l 0.08316,-0.09423 3.497645,-3.5 z"
+                 id="??-Color" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

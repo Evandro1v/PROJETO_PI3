@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+	<head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Operaçao Limpeza - Usuário</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/css/style-Ran.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- <link rel="stylesheet" href="/css/style3.css" />
+        <link rel="stylesheet" href="/css/style2.css" />
+        <link rel="stylesheet" href="/css/style-Ran.css" />
+        <link rel="stylesheet" href="/css/style-form.css" />
+        <link rel="stylesheet" href="/css/pagBase.css" />        
+            -->
+	</head>
+
+	<body>
+		<ul id="menu-user">    
+			<li>
+				<div class="container-usuarios">
+					Olá, {{user.nome}}
+				</div>
+			</li>
+			<li>
+				<form action="/logout" method="post">
+					<button class="botao_sair" type="submit">
+						<span class="icone fa-icon fa-sign-out"></span> <!-- Define icone para o botão -->
+						Sair
+					</button>
+				</form>
+			</li>
+		</ul>
+		<div>
+			<p>
+				<span class="login-form-title">
+					O que você deseja?
+				</span>
+			</p>
+			<hr>
+			<table>
+				<tbody>
+					<tr>
+						<td width="25">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Disambig.svg" width="35"
+								height="28">
+						</td>
+						<td class="info">
+							Escolha uma das opções abaixo.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="centralizar disposicao_conteudo">
+				<div id="div1-login-form" class="divs active">
+					<!--Botoes da tala inicial logada-->
+					<button class="botao botao_blue-50" onclick="showForm('cadastroProblemaForm')">Cadastrar
+						Problema</button>
+					</br>
+					<button class="botao botao_blue-50" onclick="showTable()">Visualizar Problemas</button>
+				</div>
+			</div>
+		</div>
+
+		<!--Formulário-->
+		<main>
+			<!--Botão(home) fechar telas Form/Table, agora obsoleto!
+			<button onclick="home()" id="home" style="display: none;">home</button>-->
+
+			<!--Esta div contem o NOVO formulário para cadastro de problmas-->
+			<div class="container-formulario col-12 mt-3 mt-md-0 p-0 col-lg-6" id="cadastroProblemaForm" style="display: none">
+				<div class=" d-block col-12 col-md-11 m-auto">
+
+					<!--Formulário de cadastro de problemas-->
+					<form action="/enviar-formulario" method="post" enctype="multipart/form-data">
+
+						<span class="info">
+							<p class="login-form-title">
+								Cadastro de problemas.
+								<hr>
+							</p <p>
+							Preencha os campos abaixo para informar o problema.</br>
+							Campos com * são obrigatórios.
+							</p>
+						</span>
+
+						<div class="borda_red-20 borda_arredond-8">
+
+							<div class="mt-2">
+
+								<div class="form-row mt-3">
+									<div class="col-md-6 col-12">
+										<label for="endereco">* Endereço:</label>
+										<input class="form-control" type="text" id="end_ocorrencia"
+											name="end_ocorrencia" maxlength="100" required
+											placeholder="Informe o endereco" />
+									</div>
+
+									<div class="col-md-4 col-12">
+										<label for="bairro">* Bairro:</label>
+										<input class="form-control" type="text" id="bairro" name="bairro" maxlength="50"
+											required placeholder="Informe o bairro" />
+									</div>
+
+									<div class="col-md-2 col-12">
+										<label for="cep">* CEP:</label>
+										<input class="form-control" type="text" id="cep" name="cep" maxlength="8"
+											required placeholder="Ex.: 99999999" />
+									</div>
+
+								</div>
+
+
+								<div class="form-row mt-2">
+									<div class="col-md-4 col-sm-12">
+										<label class="pl-2">* Gravidade da Ocorrência:</label>
+										<div class="w-100 d-block d-md-flex my-2">
+
+											<div class="col-sm-12 col-md-2 my-2 my-md-0">
+												<input class="form-control" type="radio" name="gravidade_da_ocorrencia"
+													value="Baixa" required />
+												<label tabindex="0" for="Baixa">Baixa</label>
+
+											</div>
+
+											<div class="col-sm-12 col-md-2 my-2 my-md-0">
+												<input class="form-control" type="radio" name="gravidade_da_ocorrencia"
+													value="Media" required />
+												<label tabindex="0" for="Media">Media</label>
+
+											</div>
+
+											<div class="col-sm-12 col-md-2 my-2 my-md-0">
+												<input class="form-control" type="radio" name="gravidade_da_ocorrencia"
+													value="Alta" required />
+												<label tabindex="0" for="Alta">Alta</label>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-8 col-sm-12">
+										<label for="descricao">* Descrição da Ocorrência:</label>
+										<textarea class="form-control container-label" id="descricao_da_ocorrencia"
+											name="descricao_da_ocorrencia" required="" maxlength="255"
+											placeholder="Ex.: Buraco de um metro de largura, dois de prufundidade, localizado na rua Pêra, na altura do número 4."></textarea>
+									</div>
+
+								</div>
+
+
+
+								<div class="form-row">
+									<div class="col-md-6 col-sm-12">
+										<label for="foto-ocorrencia">* Foto da Ocorrência:</label>
+										<input class="form-control" type="file" id="foto_da_ocorrencia"
+											name="foto_da_ocorrencia" accept="image/*" required />
+
+									</div>
+
+									<div class="col-md-6 col-sm-12">
+										<label for="foto-mapa">* Mapa da Ocorrência:</label>
+										<input class="form-control" type="file" id="foto_mapa_da_localizacao"
+											name="foto_mapa_da_localizacao" accept="image/*" />
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="col-md-6 col-sm-12">
+										<button onclick="home()" class="mt-2 w-100 botao botao_red-40">Cancelar</button>
+									</div>
+
+									<div class="col-md-6 col-sm-12">
+										<button type="submit" id="btn-cadastrar"
+											class="mt-2 w-100 botao botao_blue-50">Enviar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</main>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- <section> -->
+			<!--Div que ficar dentro desta seção(section) ficará centralizado, Usar para manter div pai cenralizado -->
+
+
+
+			<div class="">
+				<div class="login_Box sombra2 area_conteudo borda_arredond-16">
+					<div class="div-center">
+						<img src="../images/logo-OpLi.png"
+						alt="Imagem do logotipo da aplicação Operação Limpeza. Uma folha verde parcialmente transparente sobre um quadrado ao fundo de cor acinzentada clara."
+						class="logo-login">
+					</div>
+					<h2 class="nome_app">Operação Limpeza</h2>
+					
+					<main>
+						<header>
+							<div class="info_app borda_arredond-16">
+								<h5 class="">
+									Esta aplicação é um meio de comunicação para a população relatar casos de terrenos e locais com lixo, mato alto e outras situações de descarte impróprio na cidade de Sertãozinho-SP.
+								</h5>
+								<span class="info">
+									<p>
+										Login
+										<hr class="hr_preto">
+									</p>
+									<p>
+										Informe seu E-mail e Senha para entrar.
+									</p>
+								</span>
+							</div>
+						</header>
+
+					<div class="grupo_input">
+						<div class="">
+
+
+							<form method="post" onsubmit="return validateLOGIN(this)" action="/login" class="container-inputs">
+								{{#if error}}
+								<div class="error-message">
+									<p>{{error}}</p>
+								</div>
+								{{/if}}
+
+								<div class="grupo_input">
+									<div class="reset-input form">
+										<input type="email" name="email" id="email-id" placeholder="E-mail" required class="form__input" />
+										<label for="email" class="form__label">E-mail</label>
+									</div>
+								
+									<div class="form">
+										<input type="password" name="password" id="password-id" placeholder="Senha" required class="form__input" />
+										<label for="password" class="form__label">Senha</label>
+									</div>
+															
+									<!--
+									<input type="email" name="email" id="email-id" placeholder="E-mail" required /> 
+									
+									<input type="password" name="password" id="password-id" placeholder="Senha" required />-->
+									<div class="button-container">
+										<input type="submit" class="reset-input button -verde" value="Entrar" />
+									</div>
+								</div>
+
+								<div class="acoes_coluna">
+									<div class="container-spans">
+										<span class="span2 mensagem">Não é cadastrado?</span>
+										<span class="span3"><a href="/paginadecadastro">Fazer cadastro</a></span>
+									</div>
+									<div class="container-spans">
+										<span class="span2 mensagem">Esqueceu a senha?</span>
+										<span class="span3"><a href="/esqueceusenha">Recuperar senha</a></span>
+									</div>
+									
+									<div class="container-spans">
+										<span class="span2 mensagem">Voltar à página</span>
+										<span class="span3"><a href="/">Home</a></span>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					</main>
+				</div>
+			</div>
+			<footer>
+				<div class="rodape">
+					PI-3 GRUPO-012 Sertãozinho-SP - UNIVESP
+				</div>
+			</footer>
+	<!--	</section> -->
+	</body>
+</html>

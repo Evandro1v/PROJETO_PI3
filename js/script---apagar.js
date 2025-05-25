@@ -1,48 +1,22 @@
-//Função usada em esqueceusenha
-	/* A função abaixo procura fazer a div que mostra a mensagem só existir
-	quando houver erro, criando e removendo essa div dinamicamente */
-	document.addEventListener("DOMContentLoaded", function() {
-		let errorDiv = document.querySelector('.error-message');
-		let emailInput = document.getElementById("email-id");
+  //Código alterado para exibir todas as mensagens de erro em uma única div com a classe error-message.
 
-		if (errorDiv) {
-			// 🔹 Remove espaços em branco dentro da div
-			/* A remoção de espaços na div faz o css atuar sobre ela e a faz sumir */
-			errorDiv.innerHTML = errorDiv.innerHTML.trim();
+  function addErrorMessage(message) {
+    let errorDiv = document.querySelector('.error-message');
 
-			// 🔹 Se estiver vazia após a limpeza, oculta a div
-		// if (errorDiv.innerHTML === "") {
-		//      errorDiv.style.display = "none";
-		//  }
-		}
+    if (!errorDiv) {
+        errorDiv = document.createElement('div');
+        errorDiv.classList.add('error-message');
+        
+        const form = document.querySelector('form[action="/cadastro"]'); // 🔹 Ajuste para outros formulários se necessário
+        if (form) {
+            form.insertBefore(errorDiv, form.firstChild); // 🔹 Garante que a div seja adicionada sem substituir elementos críticos
+        }
+    }
 
-		// 🔹 Evento para exibir a div se o usuário clicar no campo e ela estiver oculta
-		if (submitButton) {
-			submitButton.addEventListener("click", function(event) {
-				if (errorDiv && errorDiv.style.display === "none") {
-					errorDiv.style.display = "block"; // 🔹 Faz a div aparecer novamente
-				}
-			});
-		}
-	});
+    errorDiv.innerHTML += `<p>${message}</p>`;
+}
 
-	// Unifica as mensagens do back-end e do front-end, para inserir mensagens dentro do mesmo campo em esqueceusenha 
-	// 🔹 Modificar a função de validação para exibir erro corretamente
-	function addErrorMessage(message) {
-		let errorDiv = document.querySelector('.error-message');
 
-		if (!errorDiv) {
-			errorDiv = document.createElement('div');
-			errorDiv.classList.add('error-message');
-			const form = document.querySelector('form[action="/cadastro"]');
-			if (form) {
-				form.prepend(errorDiv);
-			}
-		}
-
-		errorDiv.innerHTML += `<p>${message}</p>`;
-		errorDiv.style.display = "block"; // 🔹 Exibir a div quando houver erro
-	}
 
     
 // Função para validação de campos no formulário de cadastro
@@ -112,7 +86,7 @@ function validateResetPasswordForm(event) {
 	// Validar se o campo de e-mail está vazio antes de verificar o formato
 	// Verifica se o campo está vazio primeiro
 	if (email === "") {
-		addErrorMessage("Por favor, preencha o campo de e-mail.");
+		addErrorMessage("Por favor, preencha o campo de e-mail333.");
 		isFieldsValidated = false;
 		return; // Se o campo está vazio, Interrompe a execução antes de validar o formato
 	}
@@ -150,7 +124,7 @@ function validateResetPasswordForm(event) {
 			} else {
 				console.warn("Aviso: Formulário de recuperação de senha não encontrado.");
 			}
-			
+		
 			const formLogin = document.querySelector('form[action="/index_Op-Li"]');
 			if (formLogin) {
 				formLogin.addEventListener("submit", validateLOGIN);

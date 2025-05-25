@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Operaçao Limpeza</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- <link rel="stylesheet" href="/css/style2.css" /> -->
+		<!-- <link rel="stylesheet" href="/css/style3.css" /> -->
+		<link rel="stylesheet" href="/css/style-Ran.css" />
+	</head>
+
+	<body class="bgSizeCover">
+
+		<!-- <section> -->
+			<!--Div que ficar dentro desta seção(section) ficará centralizado, Usar para manter div pai cenralizado -->
+
+			<div class="">
+				<div class="login_Box sombra2 area_conteudo borda_arredond-16">
+					<div class="div-center">
+						<img src="../images/logo-OpLi.png"
+						alt="Imagem do logotipo da aplicação Operação Limpeza. Uma folha verde parcialmente transparente sobre um quadrado ao fundo de cor acinzentada clara."
+						class="logo-login">
+					</div>
+					<h2 class="nome_app">Operação Limpeza</h2>
+					
+					<main>
+						<header>
+							<div class="info_app borda_arredond-16">
+								<h5 class="">
+									Esta aplicação é um meio de comunicação para a população relatar casos de terrenos e locais com lixo, mato alto e outras situações de descarte impróprio na cidade de Sertãozinho-SP.
+								</h5>
+								<span class="info">
+									<p>
+									Informe seu E-mail e Senha para entrar.
+									</p>
+									<hr class="hr_preto">
+								</span>
+							</div>
+						</header>
+
+
+					<div class="grupo_input">
+						<div class="">
+
+							<form method="post" onsubmit="return validateLOGIN(this)" action="/login" class="container-inputs">
+								{{#if error}}
+								<div class="error-message">
+									<p>{{error}}</p>
+								</div>
+								{{/if}}
+
+								<div class="grupo_input">
+									<div class="reset-input form">
+										<input type="email" name="email" id="email-id" placeholder="E-mail" required class="form__input" />
+										<label for="email" class="form__label">E-mail</label>
+									</div>
+								
+									<div class="form">
+										<input type="password" name="password" id="password-id" placeholder="Senha" required class="form__input" />
+										<label for="password" class="form__label">Senha</label>
+									</div>
+								</div>							
+
+								
+								<div class="acoes">
+									<div>
+										<div class="container-spans">
+											<span class="span2 mensagem">Não é cadastrado?</span>
+											<span class="span3"><a href="/paginadecadastro">Fazer cadastro</a></span>
+										</div>
+										<div class="container-spans">
+											<span class="span2 mensagem">Esqueceu a senha?</span>
+											<span class="span3"><a href="/esqueceusenha">Recuperar senha</a></span>
+										</div>
+									</div>
+									<button class="button -verde alinhar_direita">Entrar</button>
+								</div>
+
+							</form>
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+					</main>
+				</div>
+			</div>
+			<footer>
+				<div class="rodape">
+					PI-3 GRUPO-012 Sertãozinho-SP - UNIVESP
+				</div>
+			</footer>
+	<!--	</section> -->
+	</body>
+</html>

@@ -34,43 +34,28 @@ app.use(express.json()); // Middleware para interpretar o corpo da requisição 
 app.use(express.urlencoded({ extended: false })); // Middleware para interpretar dados do formulário codificados na URL.
 
 
-const conexao = mysql.createConnection({
-  host: 'tramway.proxy.rlwy.net',
-  user: 'root',
-  password: 'ksAVssaxrROprjBIoUcYTAckUZRcFERw',
-  database: 'railway',
-  port: '44640'
-}); // Cria uma conexão com o banco de dados MySQL.
-
 // const conexao = mysql.createConnection({
-//   host: '127.0.0.1',
+//   host: 'junction.proxy.rlwy.net',
 //   user: 'root',
-//   password: '123456',
-//   database: 'operacaolimpeza',
-//   port: '3306'
-// }); // Cria uma conexão com o banco de dados MySQL local.
+//   password: 'WaPYAXZitnmQGzutZVWjvtETyMvECrAl',
+//   database: 'railway',
+//   port: '41162'
+// }); // Cria uma conexão com o banco de dados MySQL.
 
-//conexao.connect(function (erro) {
-//  if (erro) throw erro; // Se ocorrer um erro na conexão, lança uma exceção.
-//  console.log('Conexão efetuada com sucesso'); // Loga uma mensagem informando que a conexão foi estabelecida com sucesso.
-//});
+const conexao = mysql.createConnection({
+  host: '127.0.0.1',
+  user: 'root',
+  password: '',
+  database: 'tapaburaco',
+  port: '3306'
+}); // Cria uma conexão com o banco de dados MySQL local.
 
-// NOVO CÓDIGO PARA TRATAENTO DE ERRO: em vez de simplesmente lançar uma exceção(throw erro), captura o erro e exibe uma mensagem mais amigável e útil para ajudar a depuração.
-    /* Melhorias nesse código:
-    Exibe uma mensagem mais clara informando que houve um erro.
-    Mostra erro.message, erro.code e erro.stack para facilitar a depuração.
-    Mantido throw erro para interromper todo o programa se o erro ocorrer.
-    Mantém um log positivo para quando a conexão for bem-sucedida. */
-    conexao.connect(function (erro) {
-      if (erro) {
-          console.error("❌ Erro ao conectar ao banco de dados:", erro.message);
-          console.error("Código do erro:", erro.code); //Indica um código de erro específico, útil para identificar a causa do problema. Nem todos os erros possuem um code, mas é comum em erros do sistema e bancos de dados.
-          console.error("Stack:", erro.stack); // Contém o rastreamento completo do erro, mostrando onde e como ele ocorreu no código. Isso é extremamente útil para depuração
-          throw erro; // ** Interrompe todo o programa se o erro ocorrer
-      }
+conexao.connect(function (erro) {
+  if (erro) throw erro; // Se ocorrer um erro na conexão, lança uma exceção.
+  console.log('Conexão efetuada com sucesso'); // Loga uma mensagem informando que a conexão foi estabelecida com sucesso.
+});
 
-      console.log("✅ Conexão ao banco de dados efetuada com sucesso!");
-    });
+
 
 app.use(session({
   secret: 'mysecret', // Chave secreta utilizada para assinar o cookie da sessão.
@@ -133,7 +118,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 //  res.render('index', { messages: req.flash('error') });
 //});
 
-//Nova rota para nova página incial
+//Nova roda para nova página incial
 app.get("/", (req, res) => {
   res.render("index"); // Renderiza a nova página inicial primeiro
 });
@@ -164,11 +149,12 @@ app.get('/paginalogada', isLoggedIn, function (req, res) {
     const sql = `SELECT 
                 cp.id_ocorrencia,
                 cp.id_usuario,
-                cp.tipo_da_ocorrencia,
+                cp.gravidade_da_ocorrencia,
                 cp.end_ocorrencia,
                 cp.bairro,
                 cp.descricao_da_ocorrencia,
                 cp.foto_da_ocorrencia,
+                cp.foto_mapa_da_localizacao,
                 cp.status_da_ocorrencia,
                 cs.descricao_solucao,
                 cs.foto_da_solucao
@@ -181,10 +167,9 @@ app.get('/paginalogada', isLoggedIn, function (req, res) {
       if (error) {
         console.error('Error retrieving data from cad_problema table:', error);
         return res.status(500).send('Erro ao recuperar dados da tabela cad_problema.');
-        
       }
-      console.log(results); // Registrando os resultados recuperados para verificar se foram recuperados com sucesso
-      // Renderizando a página 'paginaadm' com dados do usuário e problemas recuperados
+      console.log(results); // Logging the retrieved results to check if it's retrieved successfully
+      // Rendering the 'paginaadm' page with user data and retrieved problems
       res.render('paginaadm', { user: req.user, problemas: results });
     });
   } else {
@@ -193,11 +178,12 @@ app.get('/paginalogada', isLoggedIn, function (req, res) {
     SELECT 
         cp.id_ocorrencia,
         cp.id_usuario,
-        cp.tipo_da_ocorrencia,
+        cp.gravidade_da_ocorrencia,
         cp.end_ocorrencia,
         cp.bairro,
         cp.descricao_da_ocorrencia,
         cp.foto_da_ocorrencia,
+        cp.foto_mapa_da_localizacao,
         cp.status_da_ocorrencia,
         cs.descricao_solucao,
         cs.foto_da_solucao
@@ -210,8 +196,6 @@ app.get('/paginalogada', isLoggedIn, function (req, res) {
       if (error) {
         console.error('Error retrieving data from cad_problema table:', error);
         return res.status(500).send('Erro ao recuperar dados da tabela cad_problema.');
-        //mensagem = "❌ Não foi possível acessar o bando de dados. <h6>Erro ao recuperar dados da tabela cad_problema. <br> Por favor, contacte-nos para obter assistência.</h6>";
-
       }
       console.log(results); // Logging the retrieved results to check if it's retrieved successfully
       // Rendering the 'paginalogada' page with user data and retrieved problems
@@ -224,11 +208,6 @@ app.get('/paginalogada', isLoggedIn, function (req, res) {
 app.post('/cadastro', function (req, res) {
   const { nome, telefone, email, senha } = req.body;
 
-  // ** Validação: Bloquear envios com campos vazios antes de continuar
-    if (!nome || !telefone || !email || !senha) {
-        return res.status(400).render('paginadecadastro', { error: 'Todos os campos precisam ser preenchidos 222.' });
-    }
-
   // Verifica se o email já está cadastrado
   const sqlCheckEmail = `SELECT * FROM cad_usuario WHERE \`e-mail\` = ?`;
   conexao.query(sqlCheckEmail, [email], function (error, results) {
@@ -239,8 +218,7 @@ app.post('/cadastro', function (req, res) {
 
     if (results.length > 0) {
       // Se o email já existe, retorna uma mensagem de erro
-     // return res.render('paginadecadastro', { message: 'E-mail já cadastrado.' });
-      return res.status(401).render('paginadecadastro', { error: 'E-mail já cadastrado.' });
+      return res.render('paginadecadastro', { message: 'Email já cadastrado' });
     }
 
     // Se o email não existe, procede com o cadastro
@@ -252,17 +230,12 @@ app.post('/cadastro', function (req, res) {
       }
       console.log('Usuário cadastrado com sucesso:', results);
 
-      // Anteriormente: Após o cadastro bem-sucedido, redireciona para a página de login
-      // res.redirect('index_Op-Li');
+      // Após o cadastro bem-sucedido, redireciona para a página de login
+     // res.redirect('index_Op-Li');
 
       // Renderiza a mesma página, mas com a flag indicando sucesso
-      // Uma flag (mostrarAviso) é uma variável booleana (true ou false) usada para indicar uma condição ou ativar/desativar um comportamento.
-      /* Atualmente: Após o cadastro bem-sucedido, uma flag(mostrarAviso: true)
-      indica o sucesso, ou não, da operação. Se mostrarAviso for true, o aviso será
-      exibido. Se for false, o aviso não será exibido. Com mostrarAviso sendo true,
-      a função mostrarPopup mostra o aviso, e, posteriormente, direciona à página de
-      login */
-        res.render('paginadecadastro', { mostrarAviso: true });
+      //res.send("<script>mostrarAviso();</script>");
+      res.render('paginadecadastro', { mostrarAviso: true });
       
     });
   });
@@ -270,21 +243,21 @@ app.post('/cadastro', function (req, res) {
 
 app.post('/login', function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      // Se o usuário não for encontrado, renderize a mesma página com a mensagem de erro
+      return res.status(401).render('index_Op-Li', { error: 'E-mail ou senha incorretos. Tente novamente.' });
+    }
+    req.logIn(user, function (err) {
       if (err) {
-          return next(err);
+        return next(err);
       }
-      if (!user) {
-          return res.status(401).render('index_Op-Li', { error: 'E-mail ou senha incorretos. Tente novamente.' });
-      }
-      req.logIn(user, function (err) {
-          if (err) {
-              return next(err);
-          }
-          return res.redirect('/paginalogada');
-      });
+      return res.redirect('/paginalogada'); // Redireciona para a página logada se a autenticação for bem-sucedida
+    });
   })(req, res, next);
 });
-
 app.post('/logout', function (req, res) {
   req.logout(function (err) { // Efetua o logout do usuário.
     if (err) {
@@ -302,52 +275,41 @@ app.post('/logout', function (req, res) {
 
 
 // Função para lidar com o envio do formulário de ocorrência
-  app.post('/enviar-formulario', isLoggedIn, upload.fields([
-    { name: 'foto_da_ocorrencia', maxCount: 1 }
-  ]), async function (req, res) {
-    const tipoOcorrencia = req.body.tipo_da_ocorrencia;
-    const end_ocorrencia = req.body.end_ocorrencia;
-    const bairro = req.body.bairro;
-    const cep = req.body.cep;
-    const descricao_da_ocorrencia = req.body.descricao_da_ocorrencia;
-    
-    let mensagem, sucesso;
-    
-    try {
-      // Realiza o upload das imagens da ocorrência e do mapa da localização
-      const [fotoDaOcorrenciaURL] = await Promise.all([
-        uploadImage(req.files['foto_da_ocorrencia'][0]),
-      ]);
+app.post('/enviar-formulario', isLoggedIn, upload.fields([
+  { name: 'foto_da_ocorrencia', maxCount: 1 },
+  { name: 'foto_mapa_da_localizacao', maxCount: 1 }
+]), async function (req, res) {
+  const gravidade = req.body.gravidade_da_ocorrencia;
+  const end_ocorrencia = req.body.end_ocorrencia;
+  const bairro = req.body.bairro;
+  const cep = req.body.cep;
+  const descricao_da_ocorrencia = req.body.descricao_da_ocorrencia;
 
-      // Agora você pode salvar os URLs das imagens no banco de dados ou usá-los diretamente
-      // Exemplo de como salvar os URLs no banco de dados:
-      // Salva ocorrência no banco de dados
-      const sqlInsertOcorrencia = `INSERT INTO cad_problema (id_usuario, end_ocorrencia, bairro,cep, tipo_da_ocorrencia, descricao_da_ocorrencia, foto_da_ocorrencia, status_da_ocorrencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-      const values = [req.user.id_usuario, end_ocorrencia, bairro, cep, tipoOcorrencia, descricao_da_ocorrencia, fotoDaOcorrenciaURL, 1];
+  try {
+    // Realiza o upload das imagens da ocorrência e do mapa da localização
+    const [fotoDaOcorrenciaURL, fotoMapaDaLocalizacaoURL] = await Promise.all([
+      uploadImage(req.files['foto_da_ocorrencia'][0]),
+      uploadImage(req.files['foto_mapa_da_localizacao'][0])
+    ]);
 
-      conexao.query(sqlInsertOcorrencia, values, function (error, results) {
-        if (error) {
-          console.error('Erro ao inserir ocorrência:', error);
-          mensagem = "❌ Erro ao enviar ocorrência. <h6>Por favor, contacte-nos para obter assistência.</h6>";
-          sucesso = false;
-          return res.render("paginalogada", { mensagem, sucesso }); // Renderiza página de mensagem
-          //return res.status(500).send('Erro ao enviar ocorrência.');
+    // Agora você pode salvar os URLs das imagens no banco de dados ou usá-los diretamente
+    // Exemplo de como salvar os URLs no banco de dados:
+    const sqlInsertOcorrencia = `INSERT INTO cad_problema (id_usuario, end_ocorrencia, bairro,cep, gravidade_da_ocorrencia, descricao_da_ocorrencia, foto_da_ocorrencia, foto_mapa_da_localizacao, status_da_ocorrencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const values = [req.user.id_usuario, end_ocorrencia, bairro, cep, gravidade, descricao_da_ocorrencia, fotoDaOcorrenciaURL, fotoMapaDaLocalizacaoURL, 1];
 
-        }
-        console.log('Ocorrência inserida com sucesso:', results);
-        mensagem = "✅ Ocorrência cadastrada com sucesso!";
-        sucesso = true;
-        res.render("paginalogada", { mensagem, sucesso }); // Exibe mensagem antes de redirecionar
-        //res.redirect(req.get('referer'));
-      });
-    } catch (error) {
-      console.error('Erro ao fazer upload de imagens:', error);
-      mensagem = "❌ Erro ao fazer upload de imagens.";
-      sucesso = false;
-      res.render("paginalogada", { mensagem, sucesso });
-      //res.status(500).send('Erro ao fazer upload de imagens.');
-    }
-  });
+    conexao.query(sqlInsertOcorrencia, values, function (error, results) {
+      if (error) {
+        console.error('Erro ao inserir ocorrência:', error);
+        return res.status(500).send('Erro ao enviar ocorrência.');
+      }
+      console.log('Ocorrência inserida com sucesso:', results);
+      res.redirect(req.get('referer'));
+    });
+  } catch (error) {
+    console.error('Erro ao fazer upload de imagens:', error);
+    res.status(500).send('Erro ao fazer upload de imagens.');
+  }
+});
 
 // Função para fazer upload de uma imagem para o armazenamento na nuvem
 async function uploadImage(file) {
@@ -566,12 +528,8 @@ app.post('/esqueceusenha', function (req, res) {
 
     if (results.length === 0) {
       // Se nenhum resultado for retornado, significa que o e-mail não está cadastrado
-      //return res.status(404).send('E-mail não encontrado.');
-      //return res.status(404).render('esqueceusenha', { error: '! E-mail não encontrado.' });
-      return res.status(404).render('esqueceusenha', { errorMessage: '! E-mail não encontrado.' });
-
+      return res.status(404).send('E-mail não encontrado.');
     }
-
 
     const senha = results[0].senha; // Obtém a senha do primeiro resultado
 
@@ -593,42 +551,18 @@ app.post('/esqueceusenha', function (req, res) {
       };
 
     // Envio do e-mail de recuperação de senha
-      //  transporter.sendMail(mailOptions, function (error, info) {
-      //    if (error) {
-      //      console.log(error); // Em caso de erro
-      //      res.status(500).send('Erro ao enviar e-mail de recuperação de senha.'); // Retorna um status 500 em caso de erro no envio do e-mail
-      //    } else {
-      //      console.log('E-mail de recuperação de senha enviado com sucesso: ' + info.response); // Se o e-mail for enviado com sucesso
-      //      res.status(200).send('E-mail de recuperação de senha enviado com sucesso!'); // Retorna um status 200 em caso de sucesso no envio do e-mail
-      //    }
-      //  });
-
-
-      // Código para enviar as mensagens geradas pelo back-end para o front-end, permitindo que o script de popup exiba avisos na recuperação de senha
       transporter.sendMail(mailOptions, function (error, info) {
-        let mensagem, sucesso;
-    
         if (error) {
-            console.error("Erro ao enviar e-mail:", error);
-            mensagem = "❌ Não foi possível enviar e-mail de recuperação de senha. <h6>Por favor, contacte-nos para obter assistência.</h6>";
-            sucesso = false;
+          console.log(error); // Em caso de erro
+        //  res.status(500).send('Erro ao enviar e-mail de recuperação de senha.'); // Retorna um status 500 em caso de erro no envio do e-mail. Isso faz com que o navegador exiba uma página com apenas esse texto.
+          res.status(500).json({ message: 'Erro ao enviar e-mail de recuperação de senha.' }); //Dessa forma, o servidor não gera uma nova página, e sim responde com um JSON que pode ser tratado no frontend.
+
         } else {
-            console.log("E-mail enviado com sucesso: " + info.response);
-            mensagem = "✅ E-mail de recuperação de senha enviado com sucesso!";
-            sucesso = true;
+          console.log('E-mail de recuperação de senha enviado com sucesso: ' + info.response); // Se o e-mail for enviado com sucesso
+        //  res.status(200).send('E-mail de recuperação de senha enviado com sucesso!'); // Retorna um status 200 em caso de sucesso no envio do e-mail. Isso faz com que o navegador exiba uma página com apenas esse texto.
+          res.status(200).json({ message: 'E-mail de recuperação de senha enviado com sucesso!' }); //Dessa forma, o servidor não gera uma nova página, e sim responde com um JSON que pode ser tratado no frontend.
         }
-    
-        res.render("esqueceusenha", { mensagem, sucesso });
-    });
-
-
-
-
-
-
-
-
-
+      });
 
 
 
@@ -638,6 +572,6 @@ app.post('/esqueceusenha', function (req, res) {
 });
 
 app.listen(8082, function () {
-  console.log('Servidor iniciado na porta 8082!'); // Inicia o servidor na porta 8082 e mostra uma mensagem informando que o servidor foi iniciado com sucesso.
+  console.log('Servidor iniciado na porta 8082!'); // Inicia o servidor na porta 8082 e loga uma mensagem informando que o servidor foi iniciado com sucesso.
 });
 module.exports = app;

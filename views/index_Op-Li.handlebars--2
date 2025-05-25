@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Operaçao Limpeza - Recupar senha</title>
+		<!-- <link rel="stylesheet" href="/css/style3.css" /> -->
+		<link rel="stylesheet" href="/css/style-Ran.css" />
+		<script type="Text/javascript" src="/js/scriptValEmail.js" defer></script>
+			<!--<script type="Text/javascript" src="/js/script-email - OK spans.js" defer></script> -->
+	</head>
+
+	<body">
+		<!-- <section> -->
+			<!--Div que ficar dentro desta seção ficará centralizado, Usar para manter div pai cenralizado 
+			{{#if messages.error}}
+			<div class="error-message">{{messages.error}}</div>
+			{{/if}}
+			-->
+			{{#if error}}
+				<div class="error-message">{{error}}</div>
+			{{/if}}
+
+			<div class="error-message"></div>
+
+
+				<div class="login_Box sombra2 area_conteudo borda_arredond-16">
+					<div class="div-center">
+						<img src="../images/logo-OpLi.png"
+						alt="Imagem do logotipo da aplicação Operação Limpeza. Uma folha verde parcialmente transparente sobre um quadrado ao fundo de cor acinzentada clara."
+						class="logo-login">
+					</div>
+					<h2 class="nome_app">Operação Limpeza</h2>
+					
+					<main>
+						<header>
+							<div class="info_app borda_arredond-16">
+								<h5 class="">
+									Esta aplicação é um meio de comunicação para a população relatar casos de terrenos e locais com lixo, mato alto e outras situações de descarte impróprio na cidade de Sertãozinho-SP.
+								</h5>
+								<span class="info">
+									<p>
+										Login TESTE
+										<hr class="hr_preto">
+									</p>
+									<p>
+										Informe seu e-mail para receber a sua senha.
+									</p>
+								</span>
+							</div>
+						</header>
+
+						<div class="grupo_input">
+
+							<!-- Form Usado para recuparação de senha pelos usuários cadastrados-->
+							{{!-- novalidate tira a validacao padrao do html no navegador(as mensagens de erro) --}}
+							<form method="post" onsubmit="return validateLOGIN(this)" action="/login" class="container-inputs" novalidate">
+
+
+								<div class="form">
+									<input type="email" name="email" id="email-id" placeholder="E-mail" class="form__input" />
+									<label for="email" class="form__label">E-mail</label>
+								</div>
+
+								<div class="form">
+										<input type="password" name="password" id="password-id" placeholder="Senha" class="form__input">
+										<label for="password" class="form__label">Senha</label>
+								</div>
+
+								<div class="button-container">
+									<input type="submit" class="reset-input button -verde" value="Enviar" />
+								</div>
+									
+								<div class="acoes_coluna">
+									<div class="container-spans">
+										<span class="span2 mensagem">Não é cadastrado?</span>
+										<span class="span3"><a href="/paginadecadastro">Fazer cadastro</a></span>
+									</div>
+
+									<div class="container-spans">
+										<span class="span2 mensagem">Voltar para página de</span>
+										<span class="span3"><a href="index_Op-Li">login e entrar</a></span>
+									</div>
+
+									<div class="container-spans">
+										<span class="span2 mensagem">Voltar à </span>
+										<span class="span3"><a href="/">Página inicial</a></span>
+									</div>
+								</div>
+							</form>
+						</div>
+				</main>
+			</div>
+
+			<footer>
+				<div class="rodape">
+					PI-3 GRUPO-012 Sertãozinho-SP - UNIVESP
+				</div>
+			</footer>
+	<!--	</section> 
+	
+		<script src="../js/popup.js"></script>
+
+		<div id="popup" class="popup" style="display: none;">
+			<div class="popup-content">
+				<h2 id="popupMensagem"></h2>
+				<p>Você será redirecionado(a) para página de login em <span id="contador"></span> segundos...</p>
+			</div>
+		</div>
+
+		<div id="popup" class="popup" style="display: none;">
+			<div class="popup-content">
+				<h2 id="popupMensagem"></h2>
+				<p>Você será redirecionado(a) para o login em <span id="contador"></span> segundos...</p>
+			</div>
+		</div>
+		<script src="../js/popup.js"></script>
+
+		<script>
+			mostrarPopup("Erro ao enviar e-mail!", 7); // Apenas exibe a mensagem
+			mostrarPopup("E-mail enviado com sucesso!", 7, "/index_Op-Li"); // Redireciona
+		</script>
+
+
+
+
+
+		<div id="popup" class="popup" style="display: none;">
+			<div class="popup-content">
+				<h2 id="popup-message"></h2>
+				<button onclick="fecharPopup()">Fechar</button>
+			</div>
+		</div>
+
+		<script src="../js/popup.js"></script>
+
+		<script>
+			{{#if mostrarAviso}}
+				mostrarPopup();
+			{{/if}}
+		</script>
+-->
+
+
+
+			<div id="popup" class="popup" style="display: none;">
+				<div class="popup-content">
+					<h2 id="popupMensagem"></h2>
+					<p id="contadorTexto">Você será redirecionado(a) para página de login em <span id="contador"></span> segundos...</p>
+				</div>
+			</div>
+
+			<script>
+				function mostrarPopup(mensagem, sucesso) {
+					const popup = document.getElementById("popup");
+					const popupContent = document.querySelector(".popup-content");
+					const contadorTexto = document.getElementById("contadorTexto"); // Elemento do texto
+
+					let tempo = sucesso ? 12 : 5; // Define tempo diferente para sucesso e erro
+
+					// Ajusta o estilo e o texto com base na mensagem
+					if (!sucesso) {
+						popupContent.classList.add("erro");
+						contadorTexto.innerHTML = "Este aviso será fechada em <span id='contador'></span> segundos...";
+					} else {
+						popupContent.classList.remove("erro");
+						contadorTexto.innerHTML = "Você será redirecionado(a) para página de login em <span id='contador'></span> segundos...";
+					}
+
+					document.getElementById("popupMensagem").innerHTML = mensagem;
+					popup.style.display = "flex";
+
+					const contador = document.getElementById("contador");
+					contador.textContent = tempo;
+
+					const intervalo = setInterval(() => {
+						tempo--;
+						contador.textContent = tempo;
+						if (tempo === 0) {
+							clearInterval(intervalo);
+							popup.style.display = "none";
+							if (sucesso) {
+								window.location.href = "/index_Op-Li";
+							}
+						}
+					}, 1000);
+				}
+
+				// TESTE NO `popup.js` PARA VER SE A MENSAGEM CHEGA
+				document.addEventListener("DOMContentLoaded", () => {
+					const mensagem = "{{{mensagem}}}";
+					const sucesso = {{sucesso}};
+
+					console.log("Mensagem recebida no frontend:", mensagem, "Sucesso?", sucesso); // TESTE PARA DEPURAÇÃO
+
+					if (mensagem) {
+						mostrarPopup(mensagem, sucesso);
+					}
+				});
+
+			</script>
+	</body>
+</html>

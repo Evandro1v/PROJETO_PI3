@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        .login_Box {
+            width: 400px;
+            padding: 20px;
+            margin: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .logo {
+            width: 100px;
+            border-radius: 16px;
+            box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.13);
+            position: absolute;
+            top: -70px; /* Eleva a imagem acima da margem superior */
+            left: 50%;
+            transform: translateX(-50%);
+            height: auto;
+        }
+
+        .centralizado {
+            margin-top: 37px;
+            margin-right: 0;
+            margin-bottom: -16px;
+            margin-left: 0;
+            text-align-last: center;
+        }
+
+        .info_app {
+            font-size: 18px;
+            text-align: justify;
+            font-weight: bold;
+            line-height: 1.2;
+            background-color: #ffffffa5;
+            padding: 0 2rem 0 2rem;
+            margin-top: 2.5rem;
+        }
+
+        hr {
+            margin: 15px 0;
+        }
+
+        .descricao {
+            font-weight: bold;
+        }
+
+        .grupo_input {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input {
+            padding: 10px 20px 9px 20px;
+            margin: 11px 0;
+            /*box-sizing: border-box;*/
+            border: 2px solid #DDDDDC;
+            border-radius: 16px;
+            background-color: #E7E7E747;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            outline: none;
+            box-shadow: 2px 5px 10px var(--color-smoke);
+        }
+
+        .acoes {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .link-recuperacao {
+            font-size: 12px;
+            color: blue;
+            text-decoration: none;
+        }
+
+        .botao {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login_Box">
+        <img class="logo" src="../images/logo-OpLi.png" alt="Logotipo">
+        <h2 class="nome_app">Operação Limpeza</h2>
+        <h5 class="info_app">
+            Esta aplicação é um meio de comunicação para a população relatar casos de terrenos e locais com lixo, mato alto e outras situações de descarte impróprio na cidade de Sertãozinho-SP.
+        </h5>        
+        <p class="descricao">Informe seu E-mail e Senha para entrar.</p>
+        <hr>
+        
+        <div class="grupo_input">
+            <input type="email" placeholder="E-mail">
+            <input type="password" placeholder="Senha">
+        </div>
+
+        <div class="acoes">
+            <div>
+                <a href="#" class="link-recuperacao">Esqueci minha senha</a>
+                <br>
+                <a href="#" class="link-recuperacao">Cadastrar novo usuário</a>
+            </div>
+            <button class="botao">Entrar</button>
+        </div>
+    </div>
+
+</body>
+</html>

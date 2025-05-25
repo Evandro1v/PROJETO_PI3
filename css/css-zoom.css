@@ -1,0 +1,13 @@
+body {
+	font-size: 16px; /* Tamanho base da fonte */
+	}
+	.zoom-buttons {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	}
+	.zoom-buttons button {
+	margin: 5px;
+	padding: 10px;
+	font-size: 16px;
+	}
